@@ -1,0 +1,1728 @@
+graph [
+  directed 1
+  node [
+    id 0
+    label "0"
+    pos 13.33352521881336
+    pos 46.010049138194574
+    tipologia "deposito"
+  ]
+  node [
+    id 1
+    label "1"
+    pos 13.333070548499375
+    pos 46.011592135492116
+    tipologia "fermata"
+    locazione "VIAIPPOLITONIEVO21"
+    ragazzi 2
+    ragazzi 0
+  ]
+  node [
+    id 2
+    label "2"
+    pos 13.332481034239262
+    pos 46.00685608068721
+    tipologia "fermata"
+    locazione "VIABELTRAME23"
+    ragazzi 0
+    ragazzi 17
+  ]
+  node [
+    id 3
+    label "3"
+    pos 13.332006889588357
+    pos 46.011779665523946
+    tipologia "fermata"
+    locazione "VIAGORIZIA17"
+    ragazzi 7
+    ragazzi 4
+  ]
+  node [
+    id 4
+    label "4"
+    pos 13.339888208550311
+    pos 46.01912388511622
+    tipologia "fermata"
+    locazione "VIALIPPE,FERMATAN.7"
+    ragazzi 0
+    ragazzi 2
+  ]
+  node [
+    id 5
+    label "5"
+    pos 13.333202605873304
+    pos 46.018368509384324
+    tipologia "fermata"
+    locazione "VIADEGANUTTI&#10;FERMATAN3"
+    ragazzi 0
+    ragazzi 4
+  ]
+  node [
+    id 6
+    label "6"
+    pos 13.340102597322604
+    pos 45.99918361441391
+    tipologia "fermata"
+    locazione "VIAS.GIACOMOTABELLAN25"
+    ragazzi 0
+    ragazzi 2
+  ]
+  node [
+    id 7
+    label "7"
+    pos 13.330196205996709
+    pos 46.010729342446275
+    tipologia "fermata"
+    locazione "VIAP.M.D'AVIANOFERMATAN&#176;21"
+    ragazzi 0
+    ragazzi 2
+  ]
+  node [
+    id 8
+    label "8"
+    pos 13.336214629037375
+    pos 46.01918358742248
+    tipologia "fermata"
+    locazione "VIASTEFANUTTI,FERMATA5"
+    ragazzi 0
+    ragazzi 1
+  ]
+  node [
+    id 9
+    label "9"
+    pos 13.339412764291803
+    pos 45.999314233519044
+    tipologia "fermata"
+    locazione "VIATRIESTE13-FERMATA25"
+    ragazzi 0
+    ragazzi 8
+  ]
+  node [
+    id 10
+    label "10"
+    pos 13.328366466259409
+    pos 46.020028788257015
+    tipologia "fermata"
+    locazione "VIAUDINEFERMATA36"
+    ragazzi 0
+    ragazzi 1
+  ]
+  node [
+    id 11
+    label "11"
+    pos 13.329696748576575
+    pos 46.01092472889287
+    tipologia "fermata"
+    locazione "VIADIVISIONEJULIA,47"
+    ragazzi 0
+    ragazzi 5
+  ]
+  node [
+    id 12
+    label "12"
+    pos 13.335574744098832
+    pos 46.02091466197524
+    tipologia "fermata"
+    locazione "VIAA.MANZONI-FERMATANR.34"
+    ragazzi 1
+    ragazzi 3
+  ]
+  node [
+    id 13
+    label "13"
+    pos 13.326947840304118
+    pos 46.01778681721185
+    tipologia "fermata"
+    locazione "VIARONCUZ,FERMATA12"
+    ragazzi 0
+    ragazzi 8
+  ]
+  node [
+    id 14
+    label "14"
+    pos 13.329811696254819
+    pos 46.015173106898395
+    tipologia "fermata"
+    locazione "VIAPRADAMANO,FERMATA13"
+    ragazzi 4
+    ragazzi 7
+  ]
+  node [
+    id 15
+    label "15"
+    pos 13.331240309217243
+    pos 46.008979472861995
+    tipologia "fermata"
+    locazione "VIAP.M.D'AVIANOFERMATAN.20"
+    ragazzi 0
+    ragazzi 2
+  ]
+  node [
+    id 16
+    label "16"
+    pos 13.337971
+    pos 46.000032
+    tipologia "cluster"
+  ]
+  node [
+    id 17
+    label "17"
+    pos 13.337188
+    pos 46.017635
+    tipologia "cluster"
+  ]
+  edge [
+    source 0
+    target 1
+    weight 360
+    time 49
+  ]
+  edge [
+    source 0
+    target 2
+    weight 866
+    time 80
+  ]
+  edge [
+    source 0
+    target 3
+    weight 165
+    time 25
+  ]
+  edge [
+    source 0
+    target 4
+    weight 1053
+    time 93
+  ]
+  edge [
+    source 0
+    target 5
+    weight 776
+    time 78
+  ]
+  edge [
+    source 0
+    target 6
+    weight 2103
+    time 204
+  ]
+  edge [
+    source 0
+    target 7
+    weight 254
+    time 30
+  ]
+  edge [
+    source 0
+    target 8
+    weight 951
+    time 99
+  ]
+  edge [
+    source 0
+    target 9
+    weight 1999
+    time 182
+  ]
+  edge [
+    source 0
+    target 10
+    weight 965
+    time 88
+  ]
+  edge [
+    source 0
+    target 11
+    weight 230
+    time 21
+  ]
+  edge [
+    source 0
+    target 12
+    weight 1577
+    time 174
+  ]
+  edge [
+    source 0
+    target 13
+    weight 868
+    time 90
+  ]
+  edge [
+    source 0
+    target 14
+    weight 407
+    time 44
+  ]
+  edge [
+    source 0
+    target 15
+    weight 481
+    time 63
+  ]
+  edge [
+    source 1
+    target 2
+    weight 1110
+    time 129
+  ]
+  edge [
+    source 1
+    target 3
+    weight 150
+    time 26
+  ]
+  edge [
+    source 1
+    target 4
+    weight 1236
+    time 126
+  ]
+  edge [
+    source 1
+    target 5
+    weight 958
+    time 112
+  ]
+  edge [
+    source 1
+    target 6
+    weight 2347
+    time 253
+  ]
+  edge [
+    source 1
+    target 7
+    weight 498
+    time 79
+  ]
+  edge [
+    source 1
+    target 8
+    weight 1133
+    time 132
+  ]
+  edge [
+    source 1
+    target 9
+    weight 2243
+    time 230
+  ]
+  edge [
+    source 1
+    target 10
+    weight 1148
+    time 121
+  ]
+  edge [
+    source 1
+    target 11
+    weight 474
+    time 69
+  ]
+  edge [
+    source 1
+    target 12
+    weight 1759
+    time 207
+  ]
+  edge [
+    source 1
+    target 13
+    weight 1051
+    time 123
+  ]
+  edge [
+    source 1
+    target 14
+    weight 590
+    time 77
+  ]
+  edge [
+    source 1
+    target 15
+    weight 725
+    time 111
+  ]
+  edge [
+    source 1
+    target 16
+    weight 2141
+    time 217
+  ]
+  edge [
+    source 1
+    target 17
+    weight 955
+    time 103
+  ]
+  edge [
+    source 2
+    target 1
+    weight 1048
+    time 129
+  ]
+  edge [
+    source 2
+    target 3
+    weight 898
+    time 100
+  ]
+  edge [
+    source 2
+    target 4
+    weight 1857
+    time 174
+  ]
+  edge [
+    source 2
+    target 5
+    weight 1580
+    time 159
+  ]
+  edge [
+    source 2
+    target 6
+    weight 1503
+    time 168
+  ]
+  edge [
+    source 2
+    target 7
+    weight 681
+    time 77
+  ]
+  edge [
+    source 2
+    target 8
+    weight 1755
+    time 179
+  ]
+  edge [
+    source 2
+    target 9
+    weight 1399
+    time 145
+  ]
+  edge [
+    source 2
+    target 10
+    weight 1769
+    time 168
+  ]
+  edge [
+    source 2
+    target 11
+    weight 574
+    time 60
+  ]
+  edge [
+    source 2
+    target 12
+    weight 2381
+    time 255
+  ]
+  edge [
+    source 2
+    target 13
+    weight 1554
+    time 152
+  ]
+  edge [
+    source 2
+    target 14
+    weight 1211
+    time 125
+  ]
+  edge [
+    source 2
+    target 15
+    weight 908
+    time 110
+  ]
+  edge [
+    source 2
+    target 16
+    weight 1296
+    time 132
+  ]
+  edge [
+    source 2
+    target 17
+    weight 1576
+    time 151
+  ]
+  edge [
+    source 3
+    target 1
+    weight 150
+    time 28
+  ]
+  edge [
+    source 3
+    target 2
+    weight 960
+    time 102
+  ]
+  edge [
+    source 3
+    target 4
+    weight 1218
+    time 116
+  ]
+  edge [
+    source 3
+    target 5
+    weight 940
+    time 101
+  ]
+  edge [
+    source 3
+    target 6
+    weight 2197
+    time 227
+  ]
+  edge [
+    source 3
+    target 7
+    weight 348
+    time 52
+  ]
+  edge [
+    source 3
+    target 8
+    weight 1116
+    time 121
+  ]
+  edge [
+    source 3
+    target 9
+    weight 2093
+    time 204
+  ]
+  edge [
+    source 3
+    target 10
+    weight 1130
+    time 110
+  ]
+  edge [
+    source 3
+    target 11
+    weight 324
+    time 43
+  ]
+  edge [
+    source 3
+    target 12
+    weight 1742
+    time 197
+  ]
+  edge [
+    source 3
+    target 13
+    weight 1033
+    time 113
+  ]
+  edge [
+    source 3
+    target 14
+    weight 572
+    time 67
+  ]
+  edge [
+    source 3
+    target 15
+    weight 575
+    time 85
+  ]
+  edge [
+    source 3
+    target 16
+    weight 1991
+    time 191
+  ]
+  edge [
+    source 3
+    target 17
+    weight 937
+    time 92
+  ]
+  edge [
+    source 4
+    target 1
+    weight 1236
+    time 130
+  ]
+  edge [
+    source 4
+    target 2
+    weight 1919
+    time 173
+  ]
+  edge [
+    source 4
+    target 3
+    weight 1218
+    time 118
+  ]
+  edge [
+    source 4
+    target 5
+    weight 673
+    time 64
+  ]
+  edge [
+    source 4
+    target 6
+    weight 3156
+    time 298
+  ]
+  edge [
+    source 4
+    target 7
+    weight 1307
+    time 123
+  ]
+  edge [
+    source 4
+    target 8
+    weight 402
+    time 40
+  ]
+  edge [
+    source 4
+    target 9
+    weight 3052
+    time 275
+  ]
+  edge [
+    source 4
+    target 10
+    weight 1298
+    time 121
+  ]
+  edge [
+    source 4
+    target 11
+    weight 1283
+    time 114
+  ]
+  edge [
+    source 4
+    target 12
+    weight 524
+    time 81
+  ]
+  edge [
+    source 4
+    target 13
+    weight 1320
+    time 124
+  ]
+  edge [
+    source 4
+    target 14
+    weight 1112
+    time 98
+  ]
+  edge [
+    source 4
+    target 15
+    weight 1534
+    time 156
+  ]
+  edge [
+    source 4
+    target 16
+    weight 2950
+    time 262
+  ]
+  edge [
+    source 4
+    target 17
+    weight 281
+    time 23
+  ]
+  edge [
+    source 5
+    target 1
+    weight 1024
+    time 132
+  ]
+  edge [
+    source 5
+    target 2
+    weight 1708
+    time 175
+  ]
+  edge [
+    source 5
+    target 3
+    weight 1007
+    time 120
+  ]
+  edge [
+    source 5
+    target 4
+    weight 673
+    time 67
+  ]
+  edge [
+    source 5
+    target 6
+    weight 2945
+    time 300
+  ]
+  edge [
+    source 5
+    target 7
+    weight 1096
+    time 125
+  ]
+  edge [
+    source 5
+    target 8
+    weight 386
+    time 50
+  ]
+  edge [
+    source 5
+    target 9
+    weight 2841
+    time 277
+  ]
+  edge [
+    source 5
+    target 10
+    weight 607
+    time 58
+  ]
+  edge [
+    source 5
+    target 11
+    weight 1072
+    time 116
+  ]
+  edge [
+    source 5
+    target 12
+    weight 939
+    time 139
+  ]
+  edge [
+    source 5
+    target 13
+    weight 858
+    time 83
+  ]
+  edge [
+    source 5
+    target 14
+    weight 800
+    time 83
+  ]
+  edge [
+    source 5
+    target 15
+    weight 1323
+    time 158
+  ]
+  edge [
+    source 5
+    target 16
+    weight 2739
+    time 264
+  ]
+  edge [
+    source 5
+    target 17
+    weight 590
+    time 63
+  ]
+  edge [
+    source 6
+    target 1
+    weight 2285
+    time 250
+  ]
+  edge [
+    source 6
+    target 2
+    weight 1503
+    time 170
+  ]
+  edge [
+    source 6
+    target 3
+    weight 2135
+    time 222
+  ]
+  edge [
+    source 6
+    target 4
+    weight 3094
+    time 296
+  ]
+  edge [
+    source 6
+    target 5
+    weight 2817
+    time 281
+  ]
+  edge [
+    source 6
+    target 7
+    weight 1918
+    time 198
+  ]
+  edge [
+    source 6
+    target 8
+    weight 2992
+    time 301
+  ]
+  edge [
+    source 6
+    target 9
+    weight 104
+    time 21
+  ]
+  edge [
+    source 6
+    target 10
+    weight 3006
+    time 290
+  ]
+  edge [
+    source 6
+    target 11
+    weight 1811
+    time 182
+  ]
+  edge [
+    source 6
+    target 12
+    weight 3618
+    time 377
+  ]
+  edge [
+    source 6
+    target 13
+    weight 2791
+    time 273
+  ]
+  edge [
+    source 6
+    target 14
+    weight 2448
+    time 246
+  ]
+  edge [
+    source 6
+    target 15
+    weight 1513
+    time 199
+  ]
+  edge [
+    source 6
+    target 16
+    weight 254
+    time 47
+  ]
+  edge [
+    source 6
+    target 17
+    weight 2813
+    time 272
+  ]
+  edge [
+    source 7
+    target 1
+    weight 496
+    time 76
+  ]
+  edge [
+    source 7
+    target 2
+    weight 501
+    time 76
+  ]
+  edge [
+    source 7
+    target 3
+    weight 346
+    time 48
+  ]
+  edge [
+    source 7
+    target 4
+    weight 1305
+    time 122
+  ]
+  edge [
+    source 7
+    target 5
+    weight 1028
+    time 107
+  ]
+  edge [
+    source 7
+    target 6
+    weight 1738
+    time 200
+  ]
+  edge [
+    source 7
+    target 8
+    weight 1203
+    time 127
+  ]
+  edge [
+    source 7
+    target 9
+    weight 1634
+    time 178
+  ]
+  edge [
+    source 7
+    target 10
+    weight 1217
+    time 116
+  ]
+  edge [
+    source 7
+    target 11
+    weight 134
+    time 22
+  ]
+  edge [
+    source 7
+    target 12
+    weight 1829
+    time 203
+  ]
+  edge [
+    source 7
+    target 13
+    weight 1120
+    time 118
+  ]
+  edge [
+    source 7
+    target 14
+    weight 659
+    time 72
+  ]
+  edge [
+    source 7
+    target 15
+    weight 227
+    time 33
+  ]
+  edge [
+    source 7
+    target 16
+    weight 1532
+    time 164
+  ]
+  edge [
+    source 7
+    target 17
+    weight 1024
+    time 98
+  ]
+  edge [
+    source 8
+    target 1
+    weight 1273
+    time 147
+  ]
+  edge [
+    source 8
+    target 2
+    weight 1957
+    time 191
+  ]
+  edge [
+    source 8
+    target 3
+    weight 1256
+    time 136
+  ]
+  edge [
+    source 8
+    target 4
+    weight 402
+    time 45
+  ]
+  edge [
+    source 8
+    target 5
+    weight 386
+    time 45
+  ]
+  edge [
+    source 8
+    target 6
+    weight 3194
+    time 315
+  ]
+  edge [
+    source 8
+    target 7
+    weight 1345
+    time 141
+  ]
+  edge [
+    source 8
+    target 9
+    weight 3090
+    time 292
+  ]
+  edge [
+    source 8
+    target 10
+    weight 1010
+    time 101
+  ]
+  edge [
+    source 8
+    target 11
+    weight 1321
+    time 132
+  ]
+  edge [
+    source 8
+    target 12
+    weight 602
+    time 97
+  ]
+  edge [
+    source 8
+    target 13
+    weight 1033
+    time 104
+  ]
+  edge [
+    source 8
+    target 14
+    weight 976
+    time 105
+  ]
+  edge [
+    source 8
+    target 15
+    weight 1572
+    time 174
+  ]
+  edge [
+    source 8
+    target 16
+    weight 2988
+    time 279
+  ]
+  edge [
+    source 8
+    target 17
+    weight 319
+    time 41
+  ]
+  edge [
+    source 9
+    target 1
+    weight 2181
+    time 230
+  ]
+  edge [
+    source 9
+    target 2
+    weight 1399
+    time 149
+  ]
+  edge [
+    source 9
+    target 3
+    weight 2031
+    time 201
+  ]
+  edge [
+    source 9
+    target 4
+    weight 2990
+    time 275
+  ]
+  edge [
+    source 9
+    target 5
+    weight 2713
+    time 260
+  ]
+  edge [
+    source 9
+    target 6
+    weight 104
+    time 23
+  ]
+  edge [
+    source 9
+    target 7
+    weight 1814
+    time 178
+  ]
+  edge [
+    source 9
+    target 8
+    weight 2888
+    time 280
+  ]
+  edge [
+    source 9
+    target 10
+    weight 2902
+    time 269
+  ]
+  edge [
+    source 9
+    target 11
+    weight 1707
+    time 161
+  ]
+  edge [
+    source 9
+    target 12
+    weight 3514
+    time 356
+  ]
+  edge [
+    source 9
+    target 13
+    weight 2687
+    time 252
+  ]
+  edge [
+    source 9
+    target 14
+    weight 2344
+    time 226
+  ]
+  edge [
+    source 9
+    target 15
+    weight 1409
+    time 178
+  ]
+  edge [
+    source 9
+    target 16
+    weight 150
+    time 26
+  ]
+  edge [
+    source 9
+    target 17
+    weight 2709
+    time 251
+  ]
+  edge [
+    source 10
+    target 1
+    weight 1161
+    time 131
+  ]
+  edge [
+    source 10
+    target 2
+    weight 1845
+    time 174
+  ]
+  edge [
+    source 10
+    target 3
+    weight 1144
+    time 119
+  ]
+  edge [
+    source 10
+    target 4
+    weight 1242
+    time 121
+  ]
+  edge [
+    source 10
+    target 5
+    weight 569
+    time 54
+  ]
+  edge [
+    source 10
+    target 6
+    weight 3082
+    time 299
+  ]
+  edge [
+    source 10
+    target 7
+    weight 1232
+    time 124
+  ]
+  edge [
+    source 10
+    target 8
+    weight 955
+    time 103
+  ]
+  edge [
+    source 10
+    target 9
+    weight 2978
+    time 276
+  ]
+  edge [
+    source 10
+    target 11
+    weight 1209
+    time 115
+  ]
+  edge [
+    source 10
+    target 12
+    weight 1508
+    time 192
+  ]
+  edge [
+    source 10
+    target 13
+    weight 489
+    time 50
+  ]
+  edge [
+    source 10
+    target 14
+    weight 571
+    time 51
+  ]
+  edge [
+    source 10
+    target 15
+    weight 1459
+    time 157
+  ]
+  edge [
+    source 10
+    target 16
+    weight 2875
+    time 262
+  ]
+  edge [
+    source 10
+    target 17
+    weight 1159
+    time 117
+  ]
+  edge [
+    source 11
+    target 1
+    weight 474
+    time 69
+  ]
+  edge [
+    source 11
+    target 2
+    weight 636
+    time 59
+  ]
+  edge [
+    source 11
+    target 3
+    weight 324
+    time 40
+  ]
+  edge [
+    source 11
+    target 4
+    weight 1283
+    time 114
+  ]
+  edge [
+    source 11
+    target 5
+    weight 1006
+    time 99
+  ]
+  edge [
+    source 11
+    target 6
+    weight 1873
+    time 184
+  ]
+  edge [
+    source 11
+    target 7
+    weight 107
+    time 17
+  ]
+  edge [
+    source 11
+    target 8
+    weight 1181
+    time 119
+  ]
+  edge [
+    source 11
+    target 9
+    weight 1769
+    time 161
+  ]
+  edge [
+    source 11
+    target 10
+    weight 1195
+    time 108
+  ]
+  edge [
+    source 11
+    target 12
+    weight 1807
+    time 195
+  ]
+  edge [
+    source 11
+    target 13
+    weight 1098
+    time 111
+  ]
+  edge [
+    source 11
+    target 14
+    weight 637
+    time 65
+  ]
+  edge [
+    source 11
+    target 15
+    weight 334
+    time 50
+  ]
+  edge [
+    source 11
+    target 16
+    weight 1667
+    time 148
+  ]
+  edge [
+    source 11
+    target 17
+    weight 1002
+    time 90
+  ]
+  edge [
+    source 12
+    target 1
+    weight 1759
+    time 208
+  ]
+  edge [
+    source 12
+    target 2
+    weight 2443
+    time 251
+  ]
+  edge [
+    source 12
+    target 3
+    weight 1742
+    time 196
+  ]
+  edge [
+    source 12
+    target 4
+    weight 524
+    time 78
+  ]
+  edge [
+    source 12
+    target 5
+    weight 939
+    time 128
+  ]
+  edge [
+    source 12
+    target 6
+    weight 3680
+    time 375
+  ]
+  edge [
+    source 12
+    target 7
+    weight 1830
+    time 201
+  ]
+  edge [
+    source 12
+    target 8
+    weight 602
+    time 95
+  ]
+  edge [
+    source 12
+    target 9
+    weight 3576
+    time 353
+  ]
+  edge [
+    source 12
+    target 10
+    weight 1564
+    time 184
+  ]
+  edge [
+    source 12
+    target 11
+    weight 1807
+    time 192
+  ]
+  edge [
+    source 12
+    target 13
+    weight 1586
+    time 187
+  ]
+  edge [
+    source 12
+    target 14
+    weight 1636
+    time 176
+  ]
+  edge [
+    source 12
+    target 15
+    weight 2057
+    time 234
+  ]
+  edge [
+    source 12
+    target 16
+    weight 3473
+    time 339
+  ]
+  edge [
+    source 12
+    target 17
+    weight 804
+    time 101
+  ]
+  edge [
+    source 13
+    target 1
+    weight 1051
+    time 126
+  ]
+  edge [
+    source 13
+    target 2
+    weight 1544
+    time 148
+  ]
+  edge [
+    source 13
+    target 3
+    weight 1033
+    time 114
+  ]
+  edge [
+    source 13
+    target 4
+    weight 1362
+    time 138
+  ]
+  edge [
+    source 13
+    target 5
+    weight 1058
+    time 105
+  ]
+  edge [
+    source 13
+    target 6
+    weight 2781
+    time 272
+  ]
+  edge [
+    source 13
+    target 7
+    weight 1122
+    time 120
+  ]
+  edge [
+    source 13
+    target 8
+    weight 1260
+    time 143
+  ]
+  edge [
+    source 13
+    target 9
+    weight 2677
+    time 250
+  ]
+  edge [
+    source 13
+    target 10
+    weight 489
+    time 51
+  ]
+  edge [
+    source 13
+    target 11
+    weight 1098
+    time 110
+  ]
+  edge [
+    source 13
+    target 12
+    weight 1886
+    time 219
+  ]
+  edge [
+    source 13
+    target 14
+    weight 461
+    time 47
+  ]
+  edge [
+    source 13
+    target 15
+    weight 1349
+    time 152
+  ]
+  edge [
+    source 13
+    target 16
+    weight 2574
+    time 236
+  ]
+  edge [
+    source 13
+    target 17
+    weight 1081
+    time 114
+  ]
+  edge [
+    source 14
+    target 1
+    weight 590
+    time 79
+  ]
+  edge [
+    source 14
+    target 2
+    weight 1274
+    time 123
+  ]
+  edge [
+    source 14
+    target 3
+    weight 572
+    time 68
+  ]
+  edge [
+    source 14
+    target 4
+    weight 1112
+    time 100
+  ]
+  edge [
+    source 14
+    target 5
+    weight 835
+    time 85
+  ]
+  edge [
+    source 14
+    target 6
+    weight 2510
+    time 247
+  ]
+  edge [
+    source 14
+    target 7
+    weight 661
+    time 73
+  ]
+  edge [
+    source 14
+    target 8
+    weight 1010
+    time 105
+  ]
+  edge [
+    source 14
+    target 9
+    weight 2407
+    time 225
+  ]
+  edge [
+    source 14
+    target 10
+    weight 571
+    time 52
+  ]
+  edge [
+    source 14
+    target 11
+    weight 637
+    time 64
+  ]
+  edge [
+    source 14
+    target 12
+    weight 1636
+    time 181
+  ]
+  edge [
+    source 14
+    target 13
+    weight 461
+    time 46
+  ]
+  edge [
+    source 14
+    target 15
+    weight 888
+    time 106
+  ]
+  edge [
+    source 14
+    target 16
+    weight 2304
+    time 211
+  ]
+  edge [
+    source 14
+    target 17
+    weight 832
+    time 77
+  ]
+  edge [
+    source 15
+    target 1
+    weight 723
+    time 109
+  ]
+  edge [
+    source 15
+    target 2
+    weight 274
+    time 44
+  ]
+  edge [
+    source 15
+    target 3
+    weight 573
+    time 81
+  ]
+  edge [
+    source 15
+    target 4
+    weight 1532
+    time 154
+  ]
+  edge [
+    source 15
+    target 5
+    weight 1254
+    time 140
+  ]
+  edge [
+    source 15
+    target 6
+    weight 1512
+    time 168
+  ]
+  edge [
+    source 15
+    target 7
+    weight 227
+    time 33
+  ]
+  edge [
+    source 15
+    target 8
+    weight 1430
+    time 160
+  ]
+  edge [
+    source 15
+    target 9
+    weight 1408
+    time 145
+  ]
+  edge [
+    source 15
+    target 10
+    weight 1444
+    time 149
+  ]
+  edge [
+    source 15
+    target 11
+    weight 361
+    time 55
+  ]
+  edge [
+    source 15
+    target 12
+    weight 2056
+    time 235
+  ]
+  edge [
+    source 15
+    target 13
+    weight 1517
+    time 148
+  ]
+  edge [
+    source 15
+    target 14
+    weight 886
+    time 105
+  ]
+  edge [
+    source 15
+    target 16
+    weight 1305
+    time 132
+  ]
+  edge [
+    source 15
+    target 17
+    weight 1251
+    time 131
+  ]
+  edge [
+    source 16
+    target 17
+    weight 2607
+    time 241
+  ]
+  edge [
+    source 16
+    target 0
+    weight 0
+    time 0
+  ]
+  edge [
+    source 17
+    target 16
+    weight 2669
+    time 238
+  ]
+  edge [
+    source 17
+    target 0
+    weight 0
+    time 0
+  ]
+]

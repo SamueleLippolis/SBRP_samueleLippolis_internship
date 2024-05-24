@@ -1,0 +1,19 @@
+_____________________BUTTRIO_____________________
+dict
+total cost:316736
+DEPOT:0(0)->FERMATA:4(3.0)->FERMATA:8(5.0)->FERMATA:12(8.0)->FERMATA:14(12.0)->FERMATA:3(14.0)->FERMATA:1(15.0)->CLUSTER:17(18.0)->CLUSTER:16(23.0)   numero persone: 31 total time: 1323 total distance: 8039
+DEPOT:0(0)->FERMATA:6(4.0)->FERMATA:9(5.0)->FERMATA:15(9.0)->FERMATA:2(11.0)->FERMATA:11(13.0)->FERMATA:7(14.0)->CLUSTER:17(17.0)   numero persone: 36 total time: 1042 total distance: 5595
+DEPOT:0(0)->FERMATA:10(2.0)->FERMATA:13(4.0)->FERMATA:5(7.0)->CLUSTER:17(9.0)   numero persone: 13 total time: 546 total distance: 3102
+
+total cost:316736
+DEPOT:0(0)->FERMATA:4(3.0)->FERMATA:8(5.0)->FERMATA:12(8.0)->FERMATA:14(12.0)->FERMATA:3(14.0)->FERMATA:1(15.0)->CLUSTER:17(18.0)->CLUSTER:16(23.0)   numero persone: 31 total time: 1323 total distance: 8039
+DEPOT:0(0)->FERMATA:6(4.0)->FERMATA:9(5.0)->FERMATA:15(9.0)->FERMATA:2(11.0)->FERMATA:11(13.0)->FERMATA:7(14.0)->CLUSTER:17(17.0)   numero persone: 36 total time: 1042 total distance: 5595
+DEPOT:0(0)->FERMATA:10(2.0)->FERMATA:13(4.0)->FERMATA:5(7.0)->CLUSTER:17(9.0)   numero persone: 13 total time: 546 total distance: 3102
+
+self.Number_of_stops 15
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-10-16
+time= 2.7912349700927734
+non dict
+self.Number_of_stops 15
+time= 1.0717496871948242

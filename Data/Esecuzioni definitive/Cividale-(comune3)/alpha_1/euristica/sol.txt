@@ -1,0 +1,9 @@
+total cost:223110
+total travel time:510.0
+0->2->22->20->23->3->11->21->10->8->4->17->13->19->14->16->18->25->24   numero persone: 24 total time: 2922 total distance: 13715
+0->15->9->1->7->12->6->5->24->25   numero persone: 10 total time: 1599 total distance: 9395
+
+time= 487.0355718135834
+total cost:223110
+DEPOT:0(0)->FERMATA:2(4.0)->FERMATA:22(7.0)->FERMATA:20(8.0)->FERMATA:23(11.0)->FERMATA:3(13.0)->FERMATA:11(15.0)->FERMATA:21(19.0)->FERMATA:10(21.0)->FERMATA:8(25.0)->FERMATA:4(27.0)->FERMATA:17(30.0)->FERMATA:13(34.0)->FERMATA:19(36.0)->FERMATA:14(39.0)->FERMATA:16(41.0)->FERMATA:18(43.0)->CLUSTER:25(45.0)->CLUSTER:24(49.0)   numero persone: 24 total time: 2922 total distance: 13715
+DEPOT:0(0)->FERMATA:15(3.0)->FERMATA:9(8.0)->FERMATA:1(12.0)->FERMATA:7(14.0)->FERMATA:12(17.0)->FERMATA:6(19.0)->FERMATA:5(22.0)->CLUSTER:24(23.0)->CLUSTER:25(26.0)   numero persone: 10 total time: 1599 total distance: 9395"RIVIGNANO","CIVIDALE"

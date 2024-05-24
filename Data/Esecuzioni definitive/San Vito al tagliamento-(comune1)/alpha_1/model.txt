@@ -1,0 +1,35 @@
+dict
+total cost:469311
+DEPOT:0(0)->FERMATA:8(6.0)->FERMATA:27(13.0)->FERMATA:28(18.0)->FERMATA:22(21.0)->FERMATA:1(24.0)->FERMATA:3(28.0)->FERMATA:11(35.0)->CLUSTER:32(40.0)->CLUSTER:30(46.0)   numero persone: 22 total time: 2677 total distance: 20946
+DEPOT:0(0)->FERMATA:5(6.0)->FERMATA:12(8.0)->FERMATA:19(10.0)->FERMATA:14(20.0)->FERMATA:15(25.0)->FERMATA:2(28.0)->CLUSTER:30(32.0)->CLUSTER:32(38.0)->CLUSTER:31(44.0)   numero persone: 27 total time: 2461 total distance: 17404
+DEPOT:0(0)->FERMATA:7(3.0)->FERMATA:6(5.0)->FERMATA:29(7.0)->FERMATA:9(10.0)->FERMATA:23(12.0)->FERMATA:25(13.0)->FERMATA:10(19.0)->FERMATA:17(23.0)->FERMATA:18(26.0)->FERMATA:26(30.0)->FERMATA:4(32.0)->CLUSTER:30(38.0)->CLUSTER:32(44.0)->CLUSTER:31(50.0)   numero persone: 23 total time: 2940 total distance: 17829
+DEPOT:0(0)->FERMATA:16(3.0)->FERMATA:20(8.0)->FERMATA:24(11.0)->FERMATA:13(16.0)->FERMATA:21(21.0)->CLUSTER:30(25.0)->CLUSTER:32(31.0)->CLUSTER:31(37.0)   numero persone: 10 total time: 2143 total distance: 13132
+
+total cost:469311
+DEPOT:0(0)->FERMATA:8(6.0)->FERMATA:27(13.0)->FERMATA:28(18.0)->FERMATA:22(21.0)->FERMATA:1(24.0)->FERMATA:3(28.0)->FERMATA:11(35.0)->CLUSTER:32(40.0)->CLUSTER:30(46.0)   numero persone: 22 total time: 2677 total distance: 20946
+DEPOT:0(0)->FERMATA:5(6.0)->FERMATA:12(8.0)->FERMATA:19(10.0)->FERMATA:14(20.0)->FERMATA:15(25.0)->FERMATA:2(28.0)->CLUSTER:30(32.0)->CLUSTER:32(38.0)->CLUSTER:31(44.0)   numero persone: 27 total time: 2461 total distance: 17404
+DEPOT:0(0)->FERMATA:7(3.0)->FERMATA:6(5.0)->FERMATA:29(7.0)->FERMATA:9(10.0)->FERMATA:23(12.0)->FERMATA:25(13.0)->FERMATA:10(19.0)->FERMATA:17(23.0)->FERMATA:18(26.0)->FERMATA:26(30.0)->FERMATA:4(32.0)->CLUSTER:30(38.0)->CLUSTER:32(44.0)->CLUSTER:31(50.0)   numero persone: 23 total time: 2940 total distance: 17829
+DEPOT:0(0)->FERMATA:16(3.0)->FERMATA:20(8.0)->FERMATA:24(11.0)->FERMATA:13(16.0)->FERMATA:21(21.0)->CLUSTER:30(25.0)->CLUSTER:32(31.0)->CLUSTER:31(37.0)   numero persone: 10 total time: 2143 total distance: 13132
+
+self.Number_of_stops 29
+numero bus 3.0
+[1. 0. 1. 1.]
+idx 1
+[1. 1. 1.]
+True
+time= 435.4026348590851
+
+non dict
+self.Number_of_stops 29
+numero bus 3
+[ 1. -0. -0.  1.  1. -0. -0. -0. -0. -0.]
+idx 9
+idx 8
+idx 7
+idx 6
+idx 5
+idx 2
+idx 1
+[1. 1. 1.]
+True
+time= 517.4861180782318

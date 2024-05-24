@@ -1,0 +1,32 @@
+____________________RIVIGNANO_____________________
+dict
+total cost:341760.0
+DEPOT:0(0)->FERMATA:21(7.0)->FERMATA:23(8.0)->FERMATA:10(14.0)->FERMATA:11(15.0)->FERMATA:5(17.0)->FERMATA:6(18.0)->FERMATA:4(22.0)->FERMATA:3(24.0)->FERMATA:1(26.0)->FERMATA:2(27.0)->CLUSTER:25(33.0)->CLUSTER:26(38.0)   numero persone: 30 total time: 2338 total distance: 23755
+DEPOT:0(0)->FERMATA:9(3.0)->FERMATA:8(6.0)->FERMATA:7(8.0)->CLUSTER:25(11.0)->CLUSTER:26(16.0)   numero persone: 22 total time: 935 total distance: 7718
+DEPOT:0(0)->FERMATA:15(11.0)->FERMATA:18(13.0)->FERMATA:20(17.0)->FERMATA:22(18.0)->FERMATA:24(20.0)->FERMATA:17(26.0)->FERMATA:14(29.0)->FERMATA:12(31.0)->FERMATA:16(34.0)->FERMATA:13(37.0)->FERMATA:19(40.0)->CLUSTER:26(42.0)->CLUSTER:25(47.0)   numero persone: 39 total time: 2814 total distance: 20573
+
+total cost:341760.0
+DEPOT:0(0)->FERMATA:21(7.0)->FERMATA:23(8.0)->FERMATA:10(14.0)->FERMATA:11(15.0)->FERMATA:5(17.0)->FERMATA:6(18.0)->FERMATA:4(22.0)->FERMATA:3(24.0)->FERMATA:1(26.0)->FERMATA:2(27.0)->CLUSTER:25(33.0)->CLUSTER:26(38.0)   numero persone: 30 total time: 2338 total distance: 23755
+DEPOT:0(0)->FERMATA:9(3.0)->FERMATA:8(6.0)->FERMATA:7(8.0)->CLUSTER:25(11.0)->CLUSTER:26(16.0)   numero persone: 22 total time: 935 total distance: 7718
+DEPOT:0(0)->FERMATA:15(11.0)->FERMATA:18(13.0)->FERMATA:20(17.0)->FERMATA:22(18.0)->FERMATA:24(20.0)->FERMATA:17(26.0)->FERMATA:14(29.0)->FERMATA:12(31.0)->FERMATA:16(34.0)->FERMATA:13(37.0)->FERMATA:19(40.0)->CLUSTER:26(42.0)->CLUSTER:25(47.0)   numero persone: 39 total time: 2814 total distance: 20573
+
+self.Number_of_stops 24
+numero bus 3.0
+[1. 1. 1.]
+[1. 1. 1.]
+True
+time= 1553.1426949501038
+non dict
+self.Number_of_stops 24
+numero bus 3
+[ 1. -0. -0.  1. -0. -0. -0. -0. -0.  1.]
+idx 8
+idx 7
+idx 6
+idx 5
+idx 4
+idx 2
+idx 1
+[1. 1. 1.]
+True
+time= 1337.7981715202332

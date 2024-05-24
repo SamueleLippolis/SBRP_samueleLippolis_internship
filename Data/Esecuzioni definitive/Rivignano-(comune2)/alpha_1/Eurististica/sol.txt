@@ -1,0 +1,11 @@
+total cost:342846
+total travel time:567.0
+0->18->15->20->22->24->23->21->19->16->26->25   numero persone: 32 total time: 2261 total distance: 16584
+0->9->7->8->25->26   numero persone: 22 total time: 934 total distance: 7717
+0->3->1->2->4->6->5->10->11->12->13->14->17->26->25   numero persone: 37 total time: 2281 total distance: 18545
+
+time= 270.62422132492065
+total cost:342846
+DEPOT:0(0)->FERMATA:18(10.0)->FERMATA:15(12.0)->FERMATA:20(17.0)->FERMATA:22(18.0)->FERMATA:24(20.0)->FERMATA:23(22.0)->FERMATA:21(23.0)->FERMATA:19(26.0)->FERMATA:16(29.0)->CLUSTER:26(32.0)->CLUSTER:25(37.0)   numero persone: 32 total time: 2261 total distance: 16584
+DEPOT:0(0)->FERMATA:9(3.0)->FERMATA:7(5.0)->FERMATA:8(7.0)->CLUSTER:25(11.0)->CLUSTER:26(16.0)   numero persone: 22 total time: 934 total distance: 7717
+DEPOT:0(0)->FERMATA:3(6.0)->FERMATA:1(8.0)->FERMATA:2(9.0)->FERMATA:4(11.0)->FERMATA:6(15.0)->FERMATA:5(16.0)->FERMATA:10(18.0)->FERMATA:11(19.0)->FERMATA:12(22.0)->FERMATA:13(23.0)->FERMATA:14(25.0)->FERMATA:17(28.0)->CLUSTER:26(32.0)->CLUSTER:25(37.0)   numero persone: 37 total time: 2281 total distance: 18545

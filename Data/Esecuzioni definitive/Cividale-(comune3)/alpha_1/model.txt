@@ -1,0 +1,26 @@
+dict
+total cost:329492
+DEPOT:0(0)->FERMATA:12(3.0)->FERMATA:9(7.0)->FERMATA:1(11.0)->FERMATA:7(13.0)->CLUSTER:24(18.0)->CLUSTER:25(21.0)   numero persone: 7 total time: 1231 total distance: 8491
+DEPOT:0(0)->FERMATA:15(3.0)->FERMATA:22(8.0)->FERMATA:20(9.0)->FERMATA:23(12.0)->FERMATA:3(14.0)->FERMATA:11(16.0)->FERMATA:2(19.0)->FERMATA:5(22.0)->CLUSTER:24(23.0)->CLUSTER:25(26.0)   numero persone: 15 total time: 1619 total distance: 8551
+DEPOT:0(0)->FERMATA:6(3.0)->FERMATA:10(9.0)->FERMATA:21(11.0)->FERMATA:16(15.0)->FERMATA:17(19.0)->FERMATA:8(22.0)->FERMATA:14(26.0)->FERMATA:19(29.0)->FERMATA:13(31.0)->FERMATA:18(33.0)->FERMATA:4(36.0)->CLUSTER:25(38.0)->CLUSTER:24(42.0)   numero persone: 12 total time: 2526 total distance: 12450
+
+total cost:329492
+DEPOT:0(0)->FERMATA:12(3.0)->FERMATA:9(7.0)->FERMATA:1(11.0)->FERMATA:7(13.0)->CLUSTER:24(18.0)->CLUSTER:25(21.0)   numero persone: 7 total time: 1231 total distance: 8491
+DEPOT:0(0)->FERMATA:15(3.0)->FERMATA:22(8.0)->FERMATA:20(9.0)->FERMATA:23(12.0)->FERMATA:3(14.0)->FERMATA:11(16.0)->FERMATA:2(19.0)->FERMATA:5(22.0)->CLUSTER:24(23.0)->CLUSTER:25(26.0)   numero persone: 15 total time: 1619 total distance: 8551
+DEPOT:0(0)->FERMATA:6(3.0)->FERMATA:10(9.0)->FERMATA:21(11.0)->FERMATA:16(15.0)->FERMATA:17(19.0)->FERMATA:8(22.0)->FERMATA:14(26.0)->FERMATA:19(29.0)->FERMATA:13(31.0)->FERMATA:18(33.0)->FERMATA:4(36.0)->CLUSTER:25(38.0)->CLUSTER:24(42.0)   numero persone: 12 total time: 2526 total distance: 12450
+
+self.Number_of_stops 23
+numero bus 2.0
+[1. 0. 1.]
+idx 1
+[1. 1.]
+True
+time= 3753.411471605301
+non dict
+self.Number_of_stops 23
+numero bus 2
+[1. 1. 0.]
+idx 2
+[1. 1.]
+True
+time= 3768.447588443756

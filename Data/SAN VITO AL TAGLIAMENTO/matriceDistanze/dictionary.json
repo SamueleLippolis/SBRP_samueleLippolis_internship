@@ -1,0 +1,649 @@
+{
+    "totale": [
+        "Start",
+        "Cluster 0",
+        "Cluster 1",
+        "Cluster 2",
+        "Fermata 0",
+        "Fermata 1",
+        "Fermata 2",
+        "Fermata 3",
+        "Fermata 4",
+        "Fermata 5",
+        "Fermata 6",
+        "Fermata 7",
+        "Fermata 8",
+        "Fermata 9",
+        "Fermata 10",
+        "Fermata 11",
+        "Fermata 12",
+        "Fermata 13",
+        "Fermata 14",
+        "Fermata 15",
+        "Fermata 16",
+        "Fermata 17",
+        "Fermata 18",
+        "Fermata 19",
+        "Fermata 20",
+        "Fermata 21",
+        "Fermata 22",
+        "Fermata 23",
+        "Fermata 24",
+        "Fermata 25",
+        "Fermata 26",
+        "Fermata 27",
+        "Fermata 28",
+        "Fermata 29",
+        "Fermata 30",
+        "Fermata 31",
+        "Fermata 32",
+        "Fermata 33",
+        "Fermata 34",
+        "Fermata 35",
+        "Fermata 36",
+        "Fermata 37",
+        "Fermata 38",
+        "Fermata 39",
+        "Fermata 40",
+        "Fermata 41"
+    ],
+    "comune": "SAN VITO AL TAGLIAMENTO",
+    "deposito": [
+        "Start"
+    ],
+    "deposito_info": [
+        {
+            "nome_fermata": "Start",
+            "coordinates": [
+                45.912125739103665,
+                12.852353607330306
+            ]
+        }
+    ],
+    "list_of_clusters": [
+        "Cluster 0",
+        "Cluster 1",
+        "Cluster 2"
+    ],
+    "clusters_info": [
+        {
+            "nome_cluster": "Cluster 0",
+            "nomi_scuole": [
+                "PRIMARIA GUGLIELMO MARCONI",
+                "SECONDARIA DI I GRADO AMALTEO TOMMASEO",
+                "SCUOLA DELL'INFANZIA G. RODARI"
+            ],
+            "coordinates": [
+                45.915515,
+                12.870943
+            ]
+        },
+        {
+            "nome_cluster": "Cluster 1",
+            "nomi_scuole": [
+                "PRIMARIA ANTON LAZZARO MORO",
+                "SCUOLA PARITARIA INFANZIA FABRICI"
+            ],
+            "coordinates": [
+                45.914201,
+                12.854642
+            ]
+        },
+        {
+            "nome_cluster": "Cluster 2",
+            "nomi_scuole": [
+                "INFANZIA DON ANTONIO D'ANDREA",
+                "PRIMARIA EDMONDO DE AMICIS"
+            ],
+            "coordinates": [
+                45.924731,
+                12.840927
+            ]
+        }
+    ],
+    "list_of_stops": [
+        "Fermata 0",
+        "Fermata 1",
+        "Fermata 2",
+        "Fermata 3",
+        "Fermata 4",
+        "Fermata 5",
+        "Fermata 6",
+        "Fermata 7",
+        "Fermata 8",
+        "Fermata 9",
+        "Fermata 10",
+        "Fermata 11",
+        "Fermata 12",
+        "Fermata 13",
+        "Fermata 14",
+        "Fermata 15",
+        "Fermata 16",
+        "Fermata 17",
+        "Fermata 18",
+        "Fermata 19",
+        "Fermata 20",
+        "Fermata 21",
+        "Fermata 22",
+        "Fermata 23",
+        "Fermata 24",
+        "Fermata 25",
+        "Fermata 26",
+        "Fermata 27",
+        "Fermata 28",
+        "Fermata 29",
+        "Fermata 30",
+        "Fermata 31",
+        "Fermata 32",
+        "Fermata 33",
+        "Fermata 34",
+        "Fermata 35",
+        "Fermata 36",
+        "Fermata 37",
+        "Fermata 38",
+        "Fermata 39",
+        "Fermata 40",
+        "Fermata 41"
+    ],
+    "stops_info": [
+        {
+            "nome_fermata": "Fermata 0",
+            "nome_location": "LOCALITA'S.SABINA(C/OBAR)",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.89257556965096,
+                12.885318824914828
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 1",
+            "nome_location": "INCROCIOVIAMELMOSE/VIABAGNAROLA",
+            "numero_ragazzi": 16,
+            "cluster": [
+                2,
+                0,
+                1
+            ],
+            "coordinates": [
+                45.894044741697954,
+                12.850968682873322
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 2",
+            "nome_location": "VIADELMEI'TOM'-CIV.21",
+            "numero_ragazzi": 3,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.89474187209555,
+                12.876013761782595
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 3",
+            "nome_location": "SAVORGNANO-VIAMAGGIORE(C/OEX-SCUOLE)",
+            "numero_ragazzi": 11,
+            "cluster": [
+                2,
+                0
+            ],
+            "coordinates": [
+                45.89577071278485,
+                12.852148105720179
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 4",
+            "nome_location": "VIADELCRISTO(FRONTENEGOZIOFERRAMENTA)",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.895823995947964,
+                12.872641459855922
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 5",
+            "nome_location": "VIAGAZZIOLA(C/OPIAZZETTA-CIV.12)",
+            "numero_ragazzi": 2,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.896054251846536,
+                12.855482263229614
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 6",
+            "nome_location": "LOCALITA'BOSCATTO,3-CIMITEROEBRAICO",
+            "numero_ragazzi": 2,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.899509819213584,
+                12.815691170792089
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 7",
+            "nome_location": "VIASANVITO-LOCALITA'MEZZOSTRADONE(CIV.33)",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.90369728381516,
+                12.856125875019233
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 8",
+            "nome_location": "VIAOBERDAN(AGRI3)",
+            "numero_ragazzi": 2,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.9044854341581,
+                12.866438246691326
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 9",
+            "nome_location": "VIALECORAZZA(C/OPARCHEGGIO)",
+            "numero_ragazzi": 1,
+            "cluster": [
+                1
+            ],
+            "coordinates": [
+                45.909399892877985,
+                12.860474333846488
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 10",
+            "nome_location": "VIATORRATE(C/OPARCHEGGIO)",
+            "numero_ragazzi": 2,
+            "cluster": [
+                2,
+                0
+            ],
+            "coordinates": [
+                45.91006,
+                12.84555
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 11",
+            "nome_location": "PIAZZACARBONA",
+            "numero_ragazzi": 2,
+            "cluster": [
+                0,
+                2
+            ],
+            "coordinates": [
+                45.91026882875651,
+                12.874631675236978
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 12",
+            "nome_location": "INCROCIOVIATREVISO/VIAODERZO",
+            "numero_ragazzi": 3,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.91045777204293,
+                12.844787100103034
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 13",
+            "nome_location": "VIASANTACATERINA(CIV.30)",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.91204215522043,
+                12.842741231760504
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 14",
+            "nome_location": "STAZIONEAUTOBUSSANVITOALTAGLIAMENTO",
+            "numero_ragazzi": 1,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.91212412982274,
+                12.852325435944762
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 15",
+            "nome_location": "INCROCIOVIATREVISO/VIAMOTTA",
+            "numero_ragazzi": 4,
+            "cluster": [
+                0,
+                1
+            ],
+            "coordinates": [
+                45.91221479622921,
+                12.846634831623604
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 16",
+            "nome_location": "VIALEZUCCHERIFICIO(CIVICO5)",
+            "numero_ragazzi": 3,
+            "cluster": [
+                0,
+                1
+            ],
+            "coordinates": [
+                45.91257,
+                12.84924
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 17",
+            "nome_location": "LOCALITA'TORRICELLA(NEIPRESSIALLEVAMENTOMAIALI)",
+            "numero_ragazzi": 2,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.91295375859918,
+                12.804875763733207
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 18",
+            "nome_location": "VIATORRICELLA(ESSICATOIOBIOGAS)",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.91352,
+                12.81596
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 19",
+            "nome_location": "VIADEROCCO(NEIPRESSICASERMACARABINIERI)",
+            "numero_ragazzi": 3,
+            "cluster": [
+                2
+            ],
+            "coordinates": [
+                45.913815879332624,
+                12.865289452276755
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 20",
+            "nome_location": "VIAPORDENONE(FRONTEMACELLERIA)",
+            "numero_ragazzi": 8,
+            "cluster": [
+                0,
+                2
+            ],
+            "coordinates": [
+                45.914468595884045,
+                12.848741136701339
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 21",
+            "nome_location": "VIAFRANCESCOD'ASSISI(C/OCABINACOOP)",
+            "numero_ragazzi": 2,
+            "cluster": [
+                2,
+                0
+            ],
+            "coordinates": [
+                45.915444949357365,
+                12.862462599316604
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 22",
+            "nome_location": "PARCHEGGIOVIACOLINA",
+            "numero_ragazzi": 1,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.91617342547515,
+                12.845539093137566
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 23",
+            "nome_location": "INCROCIOVIACODIZZE/VIALETRAMONTO",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.91646246422217,
+                12.851625935841568
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 24",
+            "nome_location": "VIACODIZZE(C/OEXSCUOLAMATERNA)",
+            "numero_ragazzi": 4,
+            "cluster": [
+                0,
+                2
+            ],
+            "coordinates": [
+                45.91709785444695,
+                12.851347787324794
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 25",
+            "nome_location": "VIALEGRAMSCI(C/ONEGOZIOEUROSPIN)",
+            "numero_ragazzi": 4,
+            "cluster": [
+                2
+            ],
+            "coordinates": [
+                45.919084133485214,
+                12.860769473151565
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 26",
+            "nome_location": "INCROCIOVIAACQUE/VIALEMATTEOTTI",
+            "numero_ragazzi": 2,
+            "cluster": [
+                2
+            ],
+            "coordinates": [
+                45.91993265326371,
+                12.8595447978519
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 27",
+            "nome_location": "VIACIPRESSI(PARCHEGGIO)",
+            "numero_ragazzi": 3,
+            "cluster": [
+                2,
+                0
+            ],
+            "coordinates": [
+                45.92107476633947,
+                12.868082309583485
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 28",
+            "nome_location": "INC.VIADEGASPERI/VIASALVOD'ACQUISTO",
+            "numero_ragazzi": 2,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.92109011755673,
+                12.864489340773284
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 29",
+            "nome_location": "INCROCIOVIADELFINO/VIASANT'URBANO",
+            "numero_ragazzi": 4,
+            "cluster": [
+                0,
+                2
+            ],
+            "coordinates": [
+                45.92120358110491,
+                12.856090823530488
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 30",
+            "nome_location": "VIAPRODOLONE(CIV.12/14)",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.9225343562938,
+                12.845013941815964
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 31",
+            "nome_location": "VIAROSA(CIV.25)",
+            "numero_ragazzi": 3,
+            "cluster": [
+                0,
+                2
+            ],
+            "coordinates": [
+                45.92415588848232,
+                12.876638523128008
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 32",
+            "nome_location": "VIACANEDO(CIV.16)",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.92416436151257,
+                12.828729020538816
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 33",
+            "nome_location": "BOREANA(CABINA)",
+            "numero_ragazzi": 8,
+            "cluster": [
+                0,
+                2
+            ],
+            "coordinates": [
+                45.92422622036175,
+                12.85607788167831
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 34",
+            "nome_location": "PIAZZACENTRALE-PRODOLONE(C/ODENTISTA)",
+            "numero_ragazzi": 4,
+            "cluster": [
+                0,
+                2
+            ],
+            "coordinates": [
+                45.924838911086404,
+                12.84203375670753
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 35",
+            "nome_location": "INCROCIOVIADOGNA/VIATAGLIAMENTO(UNICAFERMATA)",
+            "numero_ragazzi": 1,
+            "cluster": [
+                2
+            ],
+            "coordinates": [
+                45.92524946733363,
+                12.883226545845433
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 36",
+            "nome_location": "VIALESANGIOVANNI(CIV.51)",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.925683535004715,
+                12.85274107620899
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 37",
+            "nome_location": "VIAS.CARLO50-AREAPARCHEGGIO",
+            "numero_ragazzi": 8,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.92694015249758,
+                12.840811210635385
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 38",
+            "nome_location": "VIAS.VITO(FRONTECIVICO31)",
+            "numero_ragazzi": 1,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.93471122478077,
+                12.84352255861574
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 39",
+            "nome_location": "VIACAPITELLO(CIV.2)",
+            "numero_ragazzi": 2,
+            "cluster": [
+                1
+            ],
+            "coordinates": [
+                45.93549792852275,
+                12.87210020125508
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 40",
+            "nome_location": "INCROCIOVIALECOMUNALI/VIACOMUNALIDIMEZZO",
+            "numero_ragazzi": 1,
+            "cluster": [
+                0
+            ],
+            "coordinates": [
+                45.95113175742855,
+                12.868331673491282
+            ]
+        },
+        {
+            "nome_fermata": "Fermata 41",
+            "nome_location": "INCROCIOVIALECOMUNALI/VIACOPECE",
+            "numero_ragazzi": 0,
+            "cluster": [],
+            "coordinates": [
+                45.95790144775467,
+                12.866290669222982
+            ]
+        }
+    ]
+}

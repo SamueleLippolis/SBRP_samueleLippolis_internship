@@ -1,0 +1,35 @@
+dict
+total cost:313418.00000000006
+DEPOT:0(0)->FERMATA:4(3.0)->FERMATA:8(5.0)->FERMATA:12(8.0)->FERMATA:3(12.0)->FERMATA:1(13.0)->FERMATA:14(15.0)->CLUSTER:17(17.0)->CLUSTER:16(22.0)   numero persone: 31 total time: 1326 total distance: 8040
+DEPOT:0(0)->FERMATA:6(4.0)->FERMATA:9(5.0)->FERMATA:15(9.0)->FERMATA:2(11.0)->FERMATA:11(13.0)->FERMATA:7(14.0)->CLUSTER:17(17.0)   numero persone: 36 total time: 1042 total distance: 5595
+DEPOT:0(0)->FERMATA:10(2.0)->FERMATA:13(4.0)->FERMATA:5(7.0)->CLUSTER:17(9.0)   numero persone: 13 total time: 546 total distance: 3102
+
+total cost:313418.00000000006
+DEPOT:0(0)->FERMATA:4(3.0)->FERMATA:8(5.0)->FERMATA:12(8.0)->FERMATA:3(12.0)->FERMATA:1(13.0)->FERMATA:14(15.0)->CLUSTER:17(17.0)->CLUSTER:16(22.0)   numero persone: 31 total time: 1326 total distance: 8040
+DEPOT:0(0)->FERMATA:6(4.0)->FERMATA:9(5.0)->FERMATA:15(9.0)->FERMATA:2(11.0)->FERMATA:11(13.0)->FERMATA:7(14.0)->CLUSTER:17(17.0)   numero persone: 36 total time: 1042 total distance: 5595
+DEPOT:0(0)->FERMATA:10(2.0)->FERMATA:13(4.0)->FERMATA:5(7.0)->CLUSTER:17(9.0)   numero persone: 13 total time: 546 total distance: 3102
+
+self.Number_of_stops 15
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-10-16
+numero bus 2.0
+[1. 1. 0.]
+idx 2
+[1. 1.]
+True
+time= 2.6938726902008057
+non dict
+self.Number_of_stops 15
+numero bus 2
+[ 1. -0. -0. -0. -0. -0. -0.  1. -0. -0.]
+idx 9
+idx 8
+idx 6
+idx 5
+idx 4
+idx 3
+idx 2
+idx 1
+[1. 1.]
+True
+time= 0.842954158782959
