@@ -21,3 +21,5 @@ importEdges: it imports edges data from the folder BUTTRIO within the DATA MANAG
 importDistanceTimeMatrices2: upgrade of importDistanceTimeMatrix. The difference is that here there are cleaner e stright functions 
 
 importData: given clean data in a folder, it stores them in 4 matrices (timeMatrix, distanceMatrix, edgesMatrix, nodesMatrix)
+
+buildProblemInstances: given a path of the folder of the matrices and the name of the matrices, it builds an object of the class problemInstance with these 4 matrices 
