@@ -72,13 +72,13 @@ struct NodeDataRow {
     int id1;
     int id2;
     int id3;
-    double longitude;
     double latitude;
+    double longitude;
     std::string type;
-    int value1;
-    int value2;
-    int value3;
-    int value4;
+    int children_to_cluster_1; // Number of children to cluster 1
+    int children_to_cluster_2; // Number of children to cluster 2
+    int children_to_cluster_3; // Number of children to cluster 3
+    int children_to_cluster_4; // Number of children to cluster 4
 };
 
 // Function to read the CSV file and return a vector of DataRow structs
@@ -98,13 +98,13 @@ std::vector<NodeDataRow> readNodesCSV(const std::string& filePath) {
             row.id1 = std::stoi(tokens[0]);
             row.id2 = std::stoi(tokens[1]);
             row.id3 = std::stoi(tokens[2]);
-            row.longitude = std::stod(tokens[3]);
-            row.latitude = std::stod(tokens[4]);
+            row.latitude = std::stod(tokens[3]);
+            row.longitude = std::stod(tokens[4]);
             row.type = tokens[5];
-            row.value1 = std::stoi(tokens[6]);
-            row.value2 = std::stoi(tokens[7]);
-            row.value3 = std::stoi(tokens[8]);
-            row.value4 = std::stoi(tokens[9]);
+            row.children_to_cluster_1 = std::stoi(tokens[6]);
+            row.children_to_cluster_2 = std::stoi(tokens[7]);
+            row.children_to_cluster_3 = std::stoi(tokens[8]);
+            row.children_to_cluster_4 = std::stoi(tokens[9]);
             data.push_back(row);
         }
     }
@@ -117,9 +117,9 @@ std::vector<NodeDataRow> readNodesCSV(const std::string& filePath) {
 void printNodesMatrix(const std::vector<NodeDataRow>& dataMatrix) {
     for (const NodeDataRow& row : dataMatrix) {
         std::cout << row.id1 << " " << row.id2 << " " << row.id3 << " "
-                  << row.longitude << " " << row.latitude << " "
-                  << row.type << " " << row.value1 << " " << row.value2 << " "
-                  << row.value3 << " " << row.value4 << std::endl;
+                  << row.latitude << " " << row.longitude << " "
+                  << row.type << " " << row.children_to_cluster_1 << " " << row.children_to_cluster_2 << " "
+                  << row.children_to_cluster_3 << " " << row.children_to_cluster_4 << std::endl;
     }
 }
 
@@ -202,9 +202,9 @@ void writeNodesCSV(const std::string& filePath, const std::vector<NodeDataRow>& 
 
     for (const auto& row : dataMatrix) {
         file << row.id1 << "," << row.id2 << "," << row.id3 << ","
-             << row.longitude << "," << row.latitude << ","
-             << row.type << "," << row.value1 << "," << row.value2 << ","
-             << row.value3 << "," << row.value4 << std::endl;
+             << row.latitude << "," << row.longitude << ","
+             << row.type << "," << row.children_to_cluster_1 << "," << row.children_to_cluster_2 << ","
+             << row.children_to_cluster_3 << "," << row.children_to_cluster_4 << std::endl;
     }
 
     file.close();
@@ -349,12 +349,95 @@ public:
         busCapacities = capacities;
     }
     
-    
-
 
 };
 
+// ----------------- Initialization -----------------
+
+// Struct to represent a Route
+// Struct to represent a Route
+struct Route {
+    int busIndex;
+    std::string routeDescription;
+    std::vector<int> visitedNodes; // New field to store visited nodes
+};
+
+std::vector<Route> buildRoutes(const ProblemInstance& problemInstance) {
+    std::vector<Route> routes;
+
+    // Access nodes from the instance
+    const auto& nodes = problemInstance.getNodesMatrix();
+
+    // Find depot and all bus stops
+    int depotNodeIndex = -1;
+    std::vector<int> busStopNodeIndices;
+    std::vector<std::vector<int>> clusters; // To store children counts for each cluster
+
+    // Assuming nodesMatrix structure based on provided data
+    for (const auto& node : nodes) {
+        if (node.type == "deposito") {
+            depotNodeIndex = node.id1;
+        } else if (node.type == "fermata") {
+            busStopNodeIndices.push_back(node.id1);
+            std::vector<int> childrenCounts;
+            childrenCounts.push_back(node.children_to_cluster_1);
+            childrenCounts.push_back(node.children_to_cluster_2);
+            childrenCounts.push_back(node.children_to_cluster_3);
+            childrenCounts.push_back(node.children_to_cluster_4);
+            clusters.push_back(childrenCounts);
+        }
+    }
+
+    // If no bus stops found, handle error
+    if (busStopNodeIndices.empty()) {
+        throw std::runtime_error("No bus stops found.");
+    }
+
+    // Create routes for each bus stop
+    int routeNumber = 1;
+
+    for (int busStopIndex : busStopNodeIndices) {
+        std::string routeDescription = "Route " + std::to_string(routeNumber) + ": Depot -> Bus Stop " + std::to_string(busStopIndex) + " -> ";
+        std::vector<int> visitedNodes;
+
+        // Add nodes needed for this bus stop
+        visitedNodes.push_back(depotNodeIndex); // Start from depot
+        visitedNodes.push_back(busStopIndex); // Visit the bus stop itself
+
+        // Add clusters needed for this bus stop
+        bool clustersVisited = false;
+        for (size_t clusterIndex = 0; clusterIndex < clusters[busStopIndex - 1].size(); ++clusterIndex) {
+            if (clusters[busStopIndex - 1][clusterIndex] > 0) {
+                visitedNodes.push_back(clusterIndex + 1); // Cluster indices are 1-based
+                routeDescription += "Cluster " + std::to_string(clusterIndex + 1) + " -> ";
+                clustersVisited = true;
+            }
+        }
+
+        // If no clusters visited, remove " -> Clusters: End" from routeDescription
+        if (!clustersVisited) {
+            routeDescription.erase(routeDescription.find_last_of("->"), std::string::npos);
+        } else {
+            // Remove the last " -> " from routeDescription
+            routeDescription.erase(routeDescription.length() - 4, 4);
+        }
+
+        routes.push_back({ routeNumber, routeDescription, visitedNodes });
+        ++routeNumber;
+    }
+
+    return routes;
+}
+
+
+
+
+
+
+
+
 // ----------------- MAIN -----------------
+
 
 int main() {
     std::vector<int> busesCapacities = {50, 40, 30, 30, 30, 30, 30, 30, 30, 30};
@@ -370,12 +453,19 @@ int main() {
         // Create an instance of ProblemInstance
         ProblemInstance problemInstance(folderPath, distanceMatrixFile, timeMatrixFile, nodesMatrixFile, edgesMatrixFile, numberOfBuses, busesCapacities);
 
-        // Print all the matrices
-        problemInstance.printMatrices();
 
-        // Print the number of buses and their capacities
-        std::cout << "\nNumber of buses: " << problemInstance.getNumberOfBuses() << std::endl;
-        std::cout << "Buses capacities: " << problemInstance.getBusesCapacity()[0] << " " << problemInstance.getBusesCapacity()[1] << " " << problemInstance.getBusesCapacity()[2] << std::endl;
+        // Build the routes
+        std::vector<Route> routes = buildRoutes(problemInstance);
+
+        // Print each route
+        for (const auto& route : routes) {
+            std::cout << "Bus " << route.busIndex << " - " << route.routeDescription << std::endl;
+            std::cout << "Visited Nodes: ";
+            for (int node : route.visitedNodes) {
+                std::cout << node << " ";
+            }
+            std::cout << std::endl << std::endl;
+        }
 
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
