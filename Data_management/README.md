@@ -30,6 +30,7 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
+buildASolution: the problemInstance class now has 2 new variables related to the buses. There is a function that builds $n_{\text{numBusStops}}$ routes. Each of them goes from depot to a bus stop to all the clusters must be reached for the children taken in the bus stop. 
 
 buildProblemInstances2: buildProblemInstances upgraded. The difference is the introduction of set/get/write methods for all matrix of the class
 
