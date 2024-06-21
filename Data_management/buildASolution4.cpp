@@ -14,6 +14,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <cmath> // For std::isnan
 
 
 // ----------------- For all matrices -----------------
@@ -354,15 +355,85 @@ public:
 
 // ----------------- Initialization -----------------
 
+
+// Define the function
+int sumChildrenToClusters(const std::vector<NodeDataRow>& nodesMatrix, int nodeId) {
+    for (const auto& node : nodesMatrix) {
+        if (node.id1 == nodeId || node.id2 == nodeId || node.id3 == nodeId) {
+            return node.children_to_cluster_1 + 
+                   node.children_to_cluster_2 + 
+                   node.children_to_cluster_3 + 
+                   node.children_to_cluster_4;
+        }
+    }
+    // If the node is not found, you might want to handle it
+    // For example, return -1 or throw an exception
+    return -1; // Indicating the node was not found
+}
+
 // Struct to represent a Route
 // Struct to represent a Route
+// Define the Route struct
 struct Route {
     int busIndex;
-    std::string routeDescription;
-    std::vector<int> visitedNodes; // New field to store visited nodes
+    std::vector<int> visitedNodes; // Stores visited nodes
+    
+    // New fields to store the number of children to each cluster
+    int childrenToCluster1;
+    int childrenToCluster2;
+    int childrenToCluster3;
+    int childrenToCluster4;
+
+    // Constructor to initialize the variables
+    Route(int index) 
+        : busIndex(index), 
+          childrenToCluster1(0),
+          childrenToCluster2(0),
+          childrenToCluster3(0),
+          childrenToCluster4(0) {}
 };
 
-std::vector<Route> buildRoutes(const ProblemInstance& problemInstance) {
+
+void printRoute(const Route& route) {
+    std::cout << "Bus " << route.busIndex << std::endl;
+    std::cout << "Visited Nodes: ";
+    for (int node : route.visitedNodes) {
+        std::cout << node << " ";
+    }
+    std::cout << "\nChildren to cluster 1: " << route.childrenToCluster1 << std::endl;
+    std::cout << "Children to cluster 2: " << route.childrenToCluster2 << std::endl;
+    std::cout << "Children to cluster 3: " << route.childrenToCluster3 << std::endl;
+    std::cout << "Children to cluster 4: " << route.childrenToCluster4 << std::endl;
+    std::cout << std::endl;
+}
+
+
+int countTotalChildrenToClusters(const Route& route) {
+    return route.childrenToCluster1 + route.childrenToCluster2 + route.childrenToCluster3 + route.childrenToCluster4;
+}
+
+// Function to find the integer ID where type = "cluster"
+int findClusterID(const std::vector<NodeDataRow>& nodesMatrix, int x) {
+    int count = 0; // Counter to track how many "cluster" types have been found
+    int size = nodesMatrix.size();
+
+    for (int i = 0; i < size; ++i) {
+        if (nodesMatrix[i].type == "cluster") {
+            ++count;
+            if (count == x) {
+                return nodesMatrix[i].id1; // Return id1 of the x-th "cluster" type row
+            }
+        }
+    }
+
+    // If x is greater than the number of "cluster" types found, return -1 or handle as needed
+    return -1; // Or any suitable error code indicating x-th "cluster" type not found
+}
+
+
+
+
+std::pair<std::vector<Route>, std::vector<int>> buildRoutes(const ProblemInstance& problemInstance, const std::vector<int>& busesCapacities) {
     std::vector<Route> routes;
 
     // Access nodes from the instance
@@ -388,45 +459,111 @@ std::vector<Route> buildRoutes(const ProblemInstance& problemInstance) {
         }
     }
 
-    // If no bus stops found, handle error
+    // If no bus stops found, return empty routes and unserved nodes
     if (busStopNodeIndices.empty()) {
-        throw std::runtime_error("No bus stops found.");
+        return {routes, busStopNodeIndices};
     }
 
-    // Create routes for each bus stop
-    int routeNumber = 1;
+    int busIndex = 1; // Start bus index from 1
+    std::vector<int> unservedBusStops;
 
     for (int busStopIndex : busStopNodeIndices) {
-        std::string routeDescription = "Route " + std::to_string(routeNumber) + ": Depot -> Bus Stop " + std::to_string(busStopIndex) + " -> ";
-        std::vector<int> visitedNodes;
+        int totalChildren = clusters[busStopIndex - 1][0] + clusters[busStopIndex - 1][1] + clusters[busStopIndex - 1][2] + clusters[busStopIndex - 1][3];
+        int currentCapacity = 0;
+        bool served = false;
 
-        // Add nodes needed for this bus stop
-        visitedNodes.push_back(depotNodeIndex); // Start from depot
-        visitedNodes.push_back(busStopIndex); // Visit the bus stop itself
+        // Assign buses to this bus stop until the capacity constraint is satisfied
+        while (currentCapacity < totalChildren && busIndex <= busesCapacities.size()) {
+            int remainingCapacity = busesCapacities[busIndex - 1] - currentCapacity;
+            Route route(busIndex);
 
-        // Add clusters needed for this bus stop
-        bool clustersVisited = false;
-        for (size_t clusterIndex = 0; clusterIndex < clusters[busStopIndex - 1].size(); ++clusterIndex) {
-            if (clusters[busStopIndex - 1][clusterIndex] > 0) {
-                visitedNodes.push_back(clusterIndex + 1); // Cluster indices are 1-based
-                routeDescription += "Cluster " + std::to_string(clusterIndex + 1) + " -> ";
-                clustersVisited = true;
+            // Add nodes needed for this bus stop
+            std::vector<int> visitedNodes;
+            visitedNodes.push_back(depotNodeIndex); // Start from depot
+            visitedNodes.push_back(busStopIndex); // Visit the bus stop itself
+
+            // Add clusters needed for this bus stop
+            for (size_t clusterIndex = 0; clusterIndex < clusters[busStopIndex - 1].size(); ++clusterIndex) {
+                if (clusters[busStopIndex - 1][clusterIndex] > 0) {
+                    // Find the node ID corresponding to the cluster index
+                    int clusterNodeId = -1;
+                    // Assuming nodesMatrix has node ID corresponding to cluster indices
+                    for (const auto& node : nodes) {
+                        if (node.id1 == clusterIndex + 1) { // Assuming cluster indices are 1-based
+                            clusterNodeId = node.id1;
+                            break;
+                        }
+                    }
+                    if (clusterNodeId != -1) {
+                        int realClusterNodeId = findClusterID(problemInstance.getNodesMatrix(), clusterNodeId);
+                        visitedNodes.push_back(realClusterNodeId);
+                    }
+                }
             }
+
+            route.visitedNodes = visitedNodes;
+
+            // Distribute children to clusters according to bus capacity
+            for (size_t clusterIndex = 0; clusterIndex < clusters[busStopIndex - 1].size(); ++clusterIndex) {
+                int childrenCount = clusters[busStopIndex - 1][clusterIndex];
+                if (childrenCount > 0) {
+                    if (childrenCount <= remainingCapacity) {
+                        // Entire cluster fits into this bus
+                        switch (clusterIndex) {
+                            case 0:
+                                route.childrenToCluster1 = childrenCount;
+                                break;
+                            case 1:
+                                route.childrenToCluster2 = childrenCount;
+                                break;
+                            case 2:
+                                route.childrenToCluster3 = childrenCount;
+                                break;
+                            case 3:
+                                route.childrenToCluster4 = childrenCount;
+                                break;
+                            default:
+                                break;
+                        }
+                        currentCapacity += childrenCount;
+                    } else {
+                        // Distribute as much as possible to this cluster
+                        switch (clusterIndex) {
+                            case 0:
+                                route.childrenToCluster1 = remainingCapacity;
+                                break;
+                            case 1:
+                                route.childrenToCluster2 = remainingCapacity;
+                                break;
+                            case 2:
+                                route.childrenToCluster3 = remainingCapacity;
+                                break;
+                            case 3:
+                                route.childrenToCluster4 = remainingCapacity;
+                                break;
+                            default:
+                                break;
+                        }
+                        currentCapacity += remainingCapacity;
+                        // Remaining children go to the next bus
+                        clusters[busStopIndex - 1][clusterIndex] -= remainingCapacity;
+                    }
+                }
+            }
+
+            routes.push_back(route);
+            busIndex++;
+            served = true;
         }
 
-        // If no clusters visited, remove " -> Clusters: End" from routeDescription
-        if (!clustersVisited) {
-            routeDescription.erase(routeDescription.find_last_of("->"), std::string::npos);
-        } else {
-            // Remove the last " -> " from routeDescription
-            routeDescription.erase(routeDescription.length() - 4, 4);
+        // Check if the bus stop was served
+        if (!served) {
+            unservedBusStops.push_back(busStopIndex);
         }
-
-        routes.push_back({ routeNumber, routeDescription, visitedNodes });
-        ++routeNumber;
     }
 
-    return routes;
+    // Return routes and unserved bus stops
+    return {routes, unservedBusStops};
 }
 
 
@@ -440,37 +577,45 @@ std::vector<Route> buildRoutes(const ProblemInstance& problemInstance) {
 
 
 int main() {
-    std::vector<int> busesCapacities = {30,25, 20, 20, 20, 20, 20, 20, 20, 20};
-    try {
-        int numberOfBuses = 10;
-        // Paths for the matrices
-        std::string folderPath = "/home/samuele/Desktop/22_internship/SBRP_samueleLippolis_internship/Data_management/BUTTRIO";
-        std::string distanceMatrixFile = "buttrio_distanceMatrix.csv";
-        std::string timeMatrixFile = "buttrio_timeMatrix.csv";
-        std::string nodesMatrixFile = "buttrio_nodes.csv";
-        std::string edgesMatrixFile = "buttrio_edges.csv";
 
-        // Create an instance of ProblemInstance
-        ProblemInstance problemInstance(folderPath, distanceMatrixFile, timeMatrixFile, nodesMatrixFile, edgesMatrixFile, numberOfBuses, busesCapacities);
+    // Create an instance of ProblemInstance
+    int numberOfBuses = 10;
+    std::vector<int> busesCapacities = {10, 10, 20, 20, 20, 20, 20, 20, 20, 20};
+    
+    std::string folderPath = "/home/samuele/Desktop/22_internship/SBRP_samueleLippolis_internship/Data_management/BUTTRIO";
+    std::string distanceMatrixFile = "buttrio_distanceMatrix.csv";
+    std::string timeMatrixFile = "buttrio_timeMatrix.csv";
+    std::string nodesMatrixFile = "buttrio_nodes.csv";
+    std::string edgesMatrixFile = "buttrio_edges.csv";
+    
+    ProblemInstance problemInstance(folderPath, distanceMatrixFile, timeMatrixFile, nodesMatrixFile, edgesMatrixFile, numberOfBuses, busesCapacities);
+
+    // Print the matrices
+    int clusterId1; 
+    int clusterId2; 
+    clusterId1 = findClusterID(problemInstance.getNodesMatrix(), 1);
+    clusterId2 = findClusterID(problemInstance.getNodesMatrix(), 2);
+    std::cout << "Cluster ID 1: " << clusterId1 << std::endl;
+    std::cout << "Cluster ID 2: " << clusterId2 << std::endl;
 
 
-        // Build the routes
-        std::vector<Route> routes = buildRoutes(problemInstance);
 
-        // Print each route
-        for (const auto& route : routes) {
-            std::cout << "Bus " << route.busIndex << " - " << route.routeDescription << std::endl;
-            std::cout << "Visited Nodes: ";
-            for (int node : route.visitedNodes) {
-                std::cout << node << " ";
-            }
-            std::cout << std::endl << std::endl;
-        }
+    // Build routes and get unserved nodes, print the routes and unserved nodes
+    auto [routes, unservedNodes] = buildRoutes(problemInstance, problemInstance.busCapacities);
 
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-        return 1;
+    
+    for (const Route& route : routes) {
+        printRoute(route);
     }
+    
+    if (!unservedNodes.empty()) {
+        std::cout << "Unserved Bus Stops:" << std::endl;
+        for (int node : unservedNodes) {
+            std::cout << "- Bus Stop " << node << std::endl;
+        }
+    }
+    
+
 
 
 

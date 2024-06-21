@@ -14,6 +14,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <cmath> // For std::isnan
 
 
 // ----------------- For all matrices -----------------
@@ -362,7 +363,11 @@ struct Route {
     std::vector<int> visitedNodes; // New field to store visited nodes
 };
 
-std::vector<Route> buildRoutes(const ProblemInstance& problemInstance) {
+
+
+
+// Function to build routes
+std::vector<Route> buildRoutes(const ProblemInstance& problemInstance, const std::vector<int>& busesCapacities) {
     std::vector<Route> routes;
 
     // Access nodes from the instance
@@ -388,48 +393,100 @@ std::vector<Route> buildRoutes(const ProblemInstance& problemInstance) {
         }
     }
 
-    // If no bus stops found, handle error
+    // If no bus stops found, return empty routes
     if (busStopNodeIndices.empty()) {
-        throw std::runtime_error("No bus stops found.");
+        return routes;
     }
 
     // Create routes for each bus stop
-    int routeNumber = 1;
+    int busIndex = 0;
+    std::vector<int> unservedBusStops;
 
     for (int busStopIndex : busStopNodeIndices) {
-        std::string routeDescription = "Route " + std::to_string(routeNumber) + ": Depot -> Bus Stop " + std::to_string(busStopIndex) + " -> ";
-        std::vector<int> visitedNodes;
+        int totalChildren = clusters[busStopIndex - 1][0] + clusters[busStopIndex - 1][1] + clusters[busStopIndex - 1][2] + clusters[busStopIndex - 1][3];
+        int currentCapacity = 0;
+        bool served = false;
 
-        // Add nodes needed for this bus stop
-        visitedNodes.push_back(depotNodeIndex); // Start from depot
-        visitedNodes.push_back(busStopIndex); // Visit the bus stop itself
+        // Assign buses to this bus stop until the capacity constraint is satisfied
+        while (currentCapacity < totalChildren && busIndex < busesCapacities.size()) {
+            currentCapacity += busesCapacities[busIndex];
 
-        // Add clusters needed for this bus stop
-        bool clustersVisited = false;
-        for (size_t clusterIndex = 0; clusterIndex < clusters[busStopIndex - 1].size(); ++clusterIndex) {
-            if (clusters[busStopIndex - 1][clusterIndex] > 0) {
-                visitedNodes.push_back(clusterIndex + 1); // Cluster indices are 1-based
-                routeDescription += "Cluster " + std::to_string(clusterIndex + 1) + " -> ";
-                clustersVisited = true;
+            std::string routeDescription = "Route " + std::to_string(busIndex + 1) + ": Depot -> Bus Stop " + std::to_string(busStopIndex) + " -> ";
+            std::vector<int> visitedNodes;
+
+            // Add nodes needed for this bus stop
+            visitedNodes.push_back(depotNodeIndex); // Start from depot
+            visitedNodes.push_back(busStopIndex); // Visit the bus stop itself
+
+            // Add clusters needed for this bus stop
+            bool clustersVisited = false;
+            for (size_t clusterIndex = 0; clusterIndex < clusters[busStopIndex - 1].size(); ++clusterIndex) {
+                if (clusters[busStopIndex - 1][clusterIndex] > 0) {
+                    visitedNodes.push_back(clusterIndex + 1); // Cluster indices are 1-based
+                    routeDescription += "Cluster " + std::to_string(clusterIndex + 1) + " -> ";
+                    clustersVisited = true;
+                }
             }
+
+            // If no clusters visited, remove " -> Clusters: End" from routeDescription
+            if (!clustersVisited) {
+                routeDescription.erase(routeDescription.find_last_of("->"), std::string::npos);
+            } else {
+                // Remove the last " -> " from routeDescription
+                routeDescription.erase(routeDescription.length() - 4, 4);
+            }
+
+            routes.push_back({ busIndex + 1, routeDescription, visitedNodes });
+            busIndex++;
+            served = true;
         }
 
-        // If no clusters visited, remove " -> Clusters: End" from routeDescription
-        if (!clustersVisited) {
-            routeDescription.erase(routeDescription.find_last_of("->"), std::string::npos);
-        } else {
-            // Remove the last " -> " from routeDescription
-            routeDescription.erase(routeDescription.length() - 4, 4);
+        // Check if the bus stop was served
+        if (!served) {
+            unservedBusStops.push_back(busStopIndex);
         }
+    }
 
-        routes.push_back({ routeNumber, routeDescription, visitedNodes });
-        ++routeNumber;
+    // Return routes completed so far and unserved bus stops
+    if (!unservedBusStops.empty()) {
+        std::cout << "Warning: The following bus stops could not be served due to insufficient capacity:" << std::endl;
+        for (int busStop : unservedBusStops) {
+            std::cout << "- Bus Stop " << busStop << std::endl;
+        }
     }
 
     return routes;
 }
 
 
+
+double calculateRouteDistance(const Route& route, const ProblemInstance& problemInstance) {
+    const auto& distancesMatrix = problemInstance.getDistancesMatrix();
+    const auto& visitedNodes = route.visitedNodes;
+    double totalDistance = 0.0;
+
+    for (size_t i = 1; i < visitedNodes.size(); ++i) {
+        int fromNode = visitedNodes[i - 1]; // Get the node ID of the previous node
+        int toNode = visitedNodes[i];       // Get the node ID of the current node
+
+        // Convert node IDs to 0-based indices
+        int fromIndex = fromNode;
+        int toIndex = toNode;
+
+        // Access the distance from distancesMatrix
+        double distance = distancesMatrix[fromIndex + 1][toIndex + 1];
+
+        // Check for nan (Not a Number) values and handle appropriately
+        if (std::isnan(distance)) {
+            throw std::runtime_error("Distance between node " + std::to_string(fromNode) + " and node " + std::to_string(toNode) + " is not defined.");
+        }
+
+        // Accumulate total distance
+        totalDistance += distance;
+    }
+
+    return totalDistance;
+}
 
 
 
@@ -440,7 +497,9 @@ std::vector<Route> buildRoutes(const ProblemInstance& problemInstance) {
 
 
 int main() {
-    std::vector<int> busesCapacities = {30,25, 20, 20, 20, 20, 20, 20, 20, 20};
+    std::vector<int> busesCapacities = {10, 10, 20, 20, 20, 20, 20, 20, 20, 20};
+
+
     try {
         int numberOfBuses = 10;
         // Paths for the matrices
@@ -453,9 +512,9 @@ int main() {
         // Create an instance of ProblemInstance
         ProblemInstance problemInstance(folderPath, distanceMatrixFile, timeMatrixFile, nodesMatrixFile, edgesMatrixFile, numberOfBuses, busesCapacities);
 
-
         // Build the routes
-        std::vector<Route> routes = buildRoutes(problemInstance);
+        std::vector<Route> routes = buildRoutes(problemInstance, problemInstance.busCapacities);
+
 
         // Print each route
         for (const auto& route : routes) {
@@ -467,10 +526,19 @@ int main() {
             std::cout << std::endl << std::endl;
         }
 
+        // Example of how to calculate the total distance of a route
+        Route route = { 20, "Route 1: Depot -> Bus Stop 1 -> Cluster 1", { 0, 1, 16 } }; // Example route
+        double distance = calculateRouteDistance(route, problemInstance);
+        std::cout << "Bus " << route.busIndex << " Total distance : " << distance << " units" << std::endl;
+
+
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
         return 1;
     }
+
+
+
 
 
 

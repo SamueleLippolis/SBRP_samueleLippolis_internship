@@ -30,6 +30,14 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
+buildSolution4: upgrade of buildSolution2 and buildSolution3. It returns the number of children taken by each bus, perfectly. 
+
+buildSolution3: upgrade of buildSolution2 where also the loaded children are saved in a varible. This file is intereseting because each bus loads only children of a specific cluster. So, no mixed loads are considered. Howver, this is not the aim of the project. So, i have to update it. 
+
+testFunctionalities: similar to buildASolution2, but with new functions: sumChildrenToClusters, printRoute, sumChildrenRoute. Moreover, i modify buildRoutes: now the return is a pair which the first element are the routes and the second is the array of all the non served nodes.
+
+buildASolution2: add the fact that the sum of the capacities of all the buses are visiting a bus stop must be equal of the sum of the children in that bus stop.
+
 buildASolution: the problemInstance class now has 2 new variables related to the buses. There is a function that builds $n_{\text{numBusStops}}$ routes. Each of them goes from depot to a bus stop to all the clusters must be reached for the children taken in the bus stop. 
 
 buildProblemInstances2: buildProblemInstances upgraded. The difference is the introduction of set/get/write methods for all matrix of the class
