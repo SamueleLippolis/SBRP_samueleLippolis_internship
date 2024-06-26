@@ -30,6 +30,8 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
+buildSolution5: add things to buildSolution4. Function that checks if you can add a node to a route; a function that given a list of nodes id it returns the sum of the distance from the first node to the last; a function that given a nodesthisMatrix it returns the ID of the clusters; a function called buildAlternativeRoutes that generates all possible alternative routes of a given one (this should be upgraded in choosing the best one).
+
 buildSolution4: upgrade of buildSolution2 and buildSolution3. It returns the number of children taken by each bus, perfectly. 
 
 buildSolution3: upgrade of buildSolution2 where also the loaded children are saved in a varible. This file is intereseting because each bus loads only children of a specific cluster. So, no mixed loads are considered. Howver, this is not the aim of the project. So, i have to update it. 
