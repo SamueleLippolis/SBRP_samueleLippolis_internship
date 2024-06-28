@@ -18,6 +18,7 @@
 #include <algorithm> // For std::next_permutation
 #include <random> // For std::mt19937
 #include <ctime> // For std::time
+#include <iomanip>   // For std::fixed, std::setprecision
 
 
 // ----------------- For all matrices -----------------
@@ -590,9 +591,11 @@ bool canAddNodeToRoute(const std::vector<NodeDataRow>& nodesMatrix, const Route&
             int routeTotalChildren = route.childrenToCluster1 + route.childrenToCluster2 + route.childrenToCluster3 + route.childrenToCluster4; 
             int nodeTotalChildren = node.children_to_cluster_1 + node.children_to_cluster_2 + node.children_to_cluster_3 + node.children_to_cluster_4;
 
-            std::cout << "\nBus capacity: " << busCapacity << std::endl;
+            std::cout << "\nBus selected " << route.busIndex << std::endl;
+            std::cout << "Bus capacity: " << busCapacity << std::endl;
             std::cout << "Route total children: " << routeTotalChildren << std::endl;
             std::cout << "Node total children: " << nodeTotalChildren << std::endl;
+            std::cout << std::endl;
 
             return routeTotalChildren + nodeTotalChildren <= busCapacity;
         }
@@ -617,17 +620,22 @@ double calculateTotalDistance(const std::vector<int>& visitedNodes, const std::v
     return totalDistance;
 }
 
-// Function to generate permutations
+// Function to generate permutations of elements
 void generatePermutations(const std::vector<int>& elements, std::vector<std::vector<int>>& permutations) {
     std::vector<int> temp = elements;
+
+    // Sort the elements in ascending order initially
+    std::sort(temp.begin(), temp.end());
+
     do {
         permutations.push_back(temp);
     } while (std::next_permutation(temp.begin(), temp.end()));
 }
 
-// Function to generate all possible routes
-std::vector<std::vector<int>> generateAlternativeRoutes(const std::vector<int>& visitedNodes, const std::vector<int>& clusterIDs) {
-    std::vector<std::vector<int>> allRoutes;
+// Function to find the route with the smallest total distance
+void findOptimalRoute(Route& route, const std::vector<int>& clusterIDs, const std::vector<std::vector<double>>& distanceMatrix) {
+    // Extract visited nodes from route
+    std::vector<int>& visitedNodes = route.visitedNodes;
 
     // Split visitedNodes into depot, bus stops, and clusters
     int depot = visitedNodes[0];
@@ -646,21 +654,42 @@ std::vector<std::vector<int>> generateAlternativeRoutes(const std::vector<int>& 
     std::vector<std::vector<int>> busStopPermutations;
     std::vector<std::vector<int>> clusterPermutations;
 
+    // Ensure all permutations of bus stops and clusters are generated
     generatePermutations(busStops, busStopPermutations);
     generatePermutations(clusters, clusterPermutations);
 
-    // Combine permutations of bus stops and clusters
+    // Combine permutations of bus stops and clusters and find the route with the smallest distance
+    std::vector<int> optimalRoute;
+    double minDistance = std::numeric_limits<double>::max();
+
+    int permutationCounter = 0; // Counter for permutations
+
     for (const auto& busStopPerm : busStopPermutations) {
         for (const auto& clusterPerm : clusterPermutations) {
-            std::vector<int> route = { depot };
-            route.insert(route.end(), busStopPerm.begin(), busStopPerm.end());
-            route.insert(route.end(), clusterPerm.begin(), clusterPerm.end());
-            allRoutes.push_back(route);
+            std::vector<int> currentRoute = { depot };
+            currentRoute.insert(currentRoute.end(), busStopPerm.begin(), busStopPerm.end());
+            currentRoute.insert(currentRoute.end(), clusterPerm.begin(), clusterPerm.end());
+            double distance = calculateTotalDistance(currentRoute, distanceMatrix);
+
+            // Print permutation and its distance
+            std::cout << "\nPermutation " << ++permutationCounter << ": ";
+            for (size_t i = 0; i < currentRoute.size(); ++i) {
+                std::cout << currentRoute[i];
+                if (i < currentRoute.size() - 1) std::cout << " -> ";
+            }
+            std::cout << ", Distance: " << std::fixed << std::setprecision(2) << distance << std::endl;
+
+            // Update route's visitedNodes if current route has smaller distance
+            if (distance < minDistance) {
+                minDistance = distance;
+                route.visitedNodes = currentRoute;
+            }
         }
     }
-
-    return allRoutes;
+    std::cout << std::endl;
 }
+
+
 
 // Function to select a random route from a vector of routes
 Route getRandomRoute(const std::vector<Route>& routes) {
@@ -675,12 +704,91 @@ Route getRandomRoute(const std::vector<Route>& routes) {
 }
 
 
+// Function to add a node to a route after the depot
+void addNodeToRoute(Route& route, int nodeId, const std::vector<NodeDataRow>& nodesMatrix) {
+    // Find the node with the given nodeId in the nodes matrix
+    auto it = std::find_if(nodesMatrix.begin(), nodesMatrix.end(), 
+                           [nodeId](const NodeDataRow& node) { return node.id1 == nodeId; });
+
+    if (it == nodesMatrix.end()) {
+        std::cerr << "Node with ID " << nodeId << " not found in the nodes matrix.\n";
+        return;
+    }
+
+    const NodeDataRow& node = *it;
+
+    // Insert the node after the depot (which is the first element in visitedNodes)
+    if (route.visitedNodes.size() > 1) {
+        route.visitedNodes.insert(route.visitedNodes.begin() + 1, node.id1);
+    } else {
+        route.visitedNodes.push_back(node.id1);
+    }
+
+    // Check and add clusters if needed
+    if (node.children_to_cluster_1 > 0 && route.childrenToCluster1 == 0) {
+        int clusterID = findClusterID(nodesMatrix, 1);
+        if (clusterID != -1) {
+            route.visitedNodes.push_back(clusterID);
+        }
+    }
+    if (node.children_to_cluster_2 > 0 && route.childrenToCluster2 == 0) {
+        int clusterID = findClusterID(nodesMatrix, 2);
+        if (clusterID != -1) {
+            route.visitedNodes.push_back(clusterID);
+        }
+    }
+    if (node.children_to_cluster_3 > 0 && route.childrenToCluster3 == 0) {
+        int clusterID = findClusterID(nodesMatrix, 3);
+        if (clusterID != -1) {
+            route.visitedNodes.push_back(clusterID);
+        }
+    }
+    if (node.children_to_cluster_4 > 0 && route.childrenToCluster4 == 0) {
+        int clusterID = findClusterID(nodesMatrix, 4);
+        if (clusterID != -1) {
+            route.visitedNodes.push_back(clusterID);
+        }
+    }
+
+    // Update the children counts for the route
+    route.childrenToCluster1 += node.children_to_cluster_1;
+    route.childrenToCluster2 += node.children_to_cluster_2;
+    route.childrenToCluster3 += node.children_to_cluster_3;
+    route.childrenToCluster4 += node.children_to_cluster_4;
+}
+
+ // Function to add a node to a random route from routes and find its optimal configuration
+static void addNodeAndFindOptimal(std::vector<Route>& routes, int nodeId, const std::vector<NodeDataRow>& nodesMatrix,
+                                  const std::vector<int>& busesCapacities, const std::vector<int>& clusterIDs,
+                                  const std::vector<std::vector<double>>& distanceMatrix)
+                                  {
+    bool canAdd = false;
+    // Loop until we find a route where we can add the node within bus capacity
+    while (!canAdd) {
+        // Select a random index in the range [0, routes.size()-1]
+        int randomIndex = std::rand() % routes.size();
+
+        // Check if we can add the node's children to rPrime within bus capacity
+        canAdd = canAddNodeToRoute(nodesMatrix, routes[randomIndex], nodeId, busesCapacities);
+        // If we can add the node, update rPrime's visitedNodes and find its optimal configuration
+        if (canAdd) {
+            addNodeToRoute(routes[randomIndex], nodeId, nodesMatrix);
+            findOptimalRoute(routes[randomIndex], clusterIDs, distanceMatrix);
+        }
+    }
+}
+
+
+
+
 
 
 // ----------------- MAIN -----------------
 
 
 int main() {
+    // Seed the random number generator once at the beginning of the program
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     // Create an instance of ProblemInstance
     int numberOfBuses = 10;
@@ -708,44 +816,13 @@ int main() {
         }
     }
 
-    // Check if a node's children can be added to a route
-    int nodeId = 14; // Example node ID
-    int numberOfRoute = 10; // Example route index
-    bool boolEx = canAddNodeToRoute(problemInstance.nodesMatrix, routes[numberOfRoute-1], nodeId, busesCapacities);
-    std::cout << "\nCan add node " << nodeId << " to route  "<< numberOfRoute << " : "<< boolEx << std::endl;
 
-    // Calculate total distance for a route
-    int routeIndex = 4; // Example route index
-    double totalDistance = calculateTotalDistance(routes[routeIndex-1].visitedNodes, problemInstance.distancesMatrix);    
-    std::cout << "\nTotal distance for route "<< routeIndex << ": " << totalDistance << std::endl;
-
-    //Find all cluters id 
-    std::vector<int> clusters = findAllClusterIDs(problemInstance.nodesMatrix); 
-    std::cout << "\nClusters IDs: " << std::endl;
-    for (int cluster : clusters) {
-        std::cout << "Cluster ID: " << cluster << std::endl;
+   // add node and find optmal configuration
+   int nodeId = 10;
+   addNodeAndFindOptimal(routes, nodeId, problemInstance.getNodesMatrix(), problemInstance.getBusesCapacity(), findAllClusterIDs(problemInstance.getNodesMatrix()), problemInstance.getDistancesMatrix()); 
+   for (const Route& route : routes) {
+        printRoute(route);
     }
-
-
-    // Try generating alternative routes
-    std::vector<int> visitedNodes = {0, 1, 3, 5, 16, 17}; // Example visited nodes
-    std::cout << std::endl;
-    std::vector<std::vector<int>> alternativeRoutes = generateAlternativeRoutes(visitedNodes, clusters);
-    for (const auto& route : alternativeRoutes) {
-        std::cout << "Alternative Route: ";
-        for (int node : route) {
-            std::cout << node << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    // Try selecting a random route
-    Route randomRoute = getRandomRoute(routes);
-    std::cout << "\nRandom Route:" << std::endl;
-    printRoute(randomRoute);
-    
-
-
 
     return 0;
 }

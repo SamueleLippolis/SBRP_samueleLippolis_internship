@@ -30,7 +30,11 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
-buildSolution5: add things to buildSolution4. Function that checks if you can add a node to a route; a function that given a list of nodes id it returns the sum of the distance from the first node to the last; a function that given a nodesthisMatrix it returns the ID of the clusters; a function called buildAlternativeRoutes that generates all possible alternative routes of a given one (this should be upgraded in choosing the best one).
+buildASolution7: add things to buildASolution6. The new function addNodeAndFindOptimal: given a not served node and the routes , it select a random routes, checks if you can add the node (in terms of capacity), it adds the node, it find all the possible permutation of the bus stops and of the clusters, it finds the better in terms of distance and then it updates the route with the best permutation. 
+
+buildASolution6: add things yo buildASolution5. New functions: add a node to a route: it works; find optimal route (given a route, it computes all possible permutation of the bus stops and of the cluster, and it updates the route as the one permutation with the best fitness (that in this cas eis the smallest distance)).
+
+buildSolution5: add things to buildSolution4. Function that checks if you can add a node to a route; a function that given a list of nodes id it returns the sum of the distance from the first node to the last; a function that given a nodesthisMatrix it returns the ID of the clusters; a function called buildAlternativeRoutes that generates all possible alternative routes of a given one (this should be upgraded in choosing the best one); a function to sleect a random route given some routes
 
 buildSolution4: upgrade of buildSolution2 and buildSolution3. It returns the number of children taken by each bus, perfectly. 
 
