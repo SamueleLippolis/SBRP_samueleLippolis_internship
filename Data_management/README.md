@@ -30,6 +30,10 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
+buildASolution8: upgrade of buildASolution7. Added two functions: addNodesAndFindOptimal: add all the not visited nodes to the routes. 
+addNodesUsingProbabilityAndFindOptimal: do the same work of addNodesAndFindOptimal, but the difference is that a candidate route to be selected to add a not visited bus stop has a probability to be selected. The probability is in reverse order wrt the number of visisted bus stops of the route. 
+This is done in order to avoid situation with a route with a lot of bus stops. This is done because within the function that add the node to the bus stop there is a one that compute all the possible permutation, and this is expensive if the visited nodes are too many. 
+
 buildASolution7: add things to buildASolution6. The new function addNodeAndFindOptimal: given a not served node and the routes , it select a random routes, checks if you can add the node (in terms of capacity), it adds the node, it find all the possible permutation of the bus stops and of the clusters, it finds the better in terms of distance and then it updates the route with the best permutation. 
 
 buildASolution6: add things yo buildASolution5. New functions: add a node to a route: it works; find optimal route (given a route, it computes all possible permutation of the bus stops and of the cluster, and it updates the route as the one permutation with the best fitness (that in this cas eis the smallest distance)).
