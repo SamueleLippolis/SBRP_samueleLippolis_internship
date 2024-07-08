@@ -30,9 +30,23 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
+eaOperators1: here i define and test the ea operators. 
+
 buildASolution8: upgrade of buildASolution7. Added two functions: addNodesAndFindOptimal: add all the not visited nodes to the routes. 
 addNodesUsingProbabilityAndFindOptimal: do the same work of addNodesAndFindOptimal, but the difference is that a candidate route to be selected to add a not visited bus stop has a probability to be selected. The probability is in reverse order wrt the number of visisted bus stops of the route. 
 This is done in order to avoid situation with a route with a lot of bus stops. This is done because within the function that add the node to the bus stop there is a one that compute all the possible permutation, and this is expensive if the visited nodes are too many. 
+
+
+#### Python files 
+
+importDataFromText3: upgrade of the importDataFromText2. Simply, it does all in one function 
+
+importDataFromText-functions: all needed functions for importDataFromText3
+
+
+### Past files 
+
+#### C++ files 
 
 buildASolution7: add things to buildASolution6. The new function addNodeAndFindOptimal: given a not served node and the routes , it select a random routes, checks if you can add the node (in terms of capacity), it adds the node, it find all the possible permutation of the bus stops and of the clusters, it finds the better in terms of distance and then it updates the route with the best permutation. 
 
@@ -51,17 +65,6 @@ buildASolution2: add the fact that the sum of the capacities of all the buses ar
 buildASolution: the problemInstance class now has 2 new variables related to the buses. There is a function that builds $n_{\text{numBusStops}}$ routes. Each of them goes from depot to a bus stop to all the clusters must be reached for the children taken in the bus stop. 
 
 buildProblemInstances2: buildProblemInstances upgraded. The difference is the introduction of set/get/write methods for all matrix of the class
-
-#### Python files 
-
-importDataFromText3: upgrade of the importDataFromText2. Simply, it does all in one function 
-
-importDataFromText-functions: all needed functions for importDataFromText3
-
-
-### Past files 
-
-#### C++ files 
 
 importDistanceTimeMatrices: it imports the time and distance matrix from the folder BUTTRIO within the DATA MANAGEMENT folder, finally it prints data 
 importNodes: it imports nodes data from the folder BUTTRIO within the DATA MANAGEMENT folder, finally it prints data
