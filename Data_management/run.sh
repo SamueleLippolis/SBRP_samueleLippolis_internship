@@ -1,4 +1,4 @@
-g++ -o eaOperators1 eaOperators1.cpp
-./eaOperators1 
+g++ -o ea_operators ea_operators.cpp
+./ea_operators
 
 

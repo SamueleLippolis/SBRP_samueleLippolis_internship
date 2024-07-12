@@ -30,7 +30,11 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
-eaOperators1: here i define and test the ea operators. 
+ea_operators: new function: 2 opt 
+
+init_population2: New function: initializePopulation: it initiliaze a populatation of individuls.
+
+init_population: addedd new structurs (individual, population ... ), initialize a population. New function: buildRoutesRandomBusesAndNodes (is the same of build routes, but it picks bus stop nodes and buses in a random way (not ordered))
 
 buildASolution8: upgrade of buildASolution7. Added two functions: addNodesAndFindOptimal: add all the not visited nodes to the routes. 
 addNodesUsingProbabilityAndFindOptimal: do the same work of addNodesAndFindOptimal, but the difference is that a candidate route to be selected to add a not visited bus stop has a probability to be selected. The probability is in reverse order wrt the number of visisted bus stops of the route. 

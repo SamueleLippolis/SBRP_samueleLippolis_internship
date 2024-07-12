@@ -20,6 +20,7 @@
 #include <ctime> // For std::time
 #include <iomanip>   // For std::fixed, std::setprecision
 #include <numeric> // for std::accumulate
+#include <unordered_set> // For std::unordered_set
 
 
 // ----------------- For all matrices -----------------
@@ -582,6 +583,175 @@ std::pair<std::vector<Route>, std::vector<int>> buildRoutes(const ProblemInstanc
     return {routes, unservedBusStops};
 }
 
+// Same of the buildRoutes function, but with picking the buses randomly 
+std::pair<std::vector<Route>, std::vector<int>> buildRoutesRandomBuses(const ProblemInstance& problemInstance, const std::vector<int>& busesCapacities) {
+    std::vector<Route> routes;
+    const auto& nodes = problemInstance.getNodesMatrix();
+
+    int depotNodeIndex = -1;
+    std::vector<int> busStopNodeIndices;
+    std::vector<std::vector<int>> clusters;
+
+    for (const auto& node : nodes) {
+        if (node.type == "deposito") {
+            depotNodeIndex = node.id1;
+        } else if (node.type == "fermata") {
+            busStopNodeIndices.push_back(node.id1);
+            clusters.push_back({node.children_to_cluster_1, node.children_to_cluster_2, node.children_to_cluster_3, node.children_to_cluster_4});
+        }
+    }
+
+    if (busStopNodeIndices.empty()) {
+        return {routes, busStopNodeIndices};
+    }
+
+    // Initialize bus indexes
+    std::vector<int> busIndexes(busesCapacities.size());
+    std::iota(busIndexes.begin(), busIndexes.end(), 0); // Fill with 0, 1, 2, ..., n-1
+
+    std::vector<int> unservedBusStops;
+    std::random_device rd; // Obtain a random number from hardware
+    std::mt19937 gen(rd()); // Seed the generator
+
+    for (int busStopIndex : busStopNodeIndices) {
+        int totalChildren = clusters[busStopIndex - 1][0] + clusters[busStopIndex - 1][1] + clusters[busStopIndex - 1][2] + clusters[busStopIndex - 1][3];
+        int currentCapacity = 0;
+        bool served = false;
+
+        // Assign buses to this bus stop until the capacity constraint is satisfied
+        while (currentCapacity < totalChildren && !busIndexes.empty()) {
+            std::uniform_int_distribution<> dis(0, busIndexes.size() - 1);
+            int busIndex = busIndexes[dis(gen)];
+            busIndexes.erase(std::remove(busIndexes.begin(), busIndexes.end(), busIndex), busIndexes.end());
+            int remainingCapacity = busesCapacities[busIndex] - currentCapacity;
+            Route route(busIndex + 1); // Bus index should be 1-based
+
+            std::vector<int> visitedNodes;
+            visitedNodes.push_back(depotNodeIndex); // Start from depot
+            visitedNodes.push_back(busStopIndex); // Visit the bus stop itself
+
+            for (size_t clusterIndex = 0; clusterIndex < clusters[busStopIndex - 1].size(); ++clusterIndex) {
+                if (clusters[busStopIndex - 1][clusterIndex] > 0) {
+                    int clusterNodeId = clusterIndex + 1;
+                    int realClusterNodeId = findClusterID(problemInstance.getNodesMatrix(), clusterNodeId);
+                    visitedNodes.push_back(realClusterNodeId);
+
+                    int childrenCount = clusters[busStopIndex - 1][clusterIndex];
+                    if (childrenCount <= remainingCapacity) {
+                        currentCapacity += childrenCount;
+                        switch (clusterIndex) {
+                            case 0: route.childrenToCluster1 = childrenCount; break;
+                            case 1: route.childrenToCluster2 = childrenCount; break;
+                            case 2: route.childrenToCluster3 = childrenCount; break;
+                            case 3: route.childrenToCluster4 = childrenCount; break;
+                        }
+                    } else {
+                        currentCapacity += remainingCapacity;
+                        switch (clusterIndex) {
+                            case 0: route.childrenToCluster1 = remainingCapacity; break;
+                            case 1: route.childrenToCluster2 = remainingCapacity; break;
+                            case 2: route.childrenToCluster3 = remainingCapacity; break;
+                            case 3: route.childrenToCluster4 = remainingCapacity; break;
+                        }
+                        clusters[busStopIndex - 1][clusterIndex] -= remainingCapacity;
+                    }
+                }
+            }
+
+            route.visitedNodes = visitedNodes;
+            routes.push_back(route);
+            served = true;
+        }
+
+        if (!served) {
+            unservedBusStops.push_back(busStopIndex);
+        }
+    }
+
+    return {routes, unservedBusStops};
+}
+
+// Same of the buildRoutes function, but with picking the buses randomly and picking the nodes randomly
+std::pair<std::vector<Route>, std::vector<int>> buildRoutesRandomBusesAndNodes(const ProblemInstance& problemInstance, const std::vector<int>& busesCapacities) {
+    std::vector<Route> routes;
+    const auto& nodes = problemInstance.getNodesMatrix();
+
+    int depotNodeIndex = -1;
+    std::vector<int> busStopNodeIndices;
+    std::vector<std::vector<int>> clusters;
+
+    for (const auto& node : nodes) {
+        if (node.type == "deposito") {
+            depotNodeIndex = node.id1;
+        } else if (node.type == "fermata") {
+            busStopNodeIndices.push_back(node.id1);
+            clusters.push_back({node.children_to_cluster_1, node.children_to_cluster_2, node.children_to_cluster_3, node.children_to_cluster_4});
+        }
+    }
+
+    if (busStopNodeIndices.empty()) {
+        return {routes, busStopNodeIndices};
+    }
+
+    // Shuffle bus stop indices
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::shuffle(busStopNodeIndices.begin(), busStopNodeIndices.end(), gen);
+
+    std::vector<int> unservedBusStops;
+    std::vector<int> remainingBusIndexes(busesCapacities.size());
+    std::iota(remainingBusIndexes.begin(), remainingBusIndexes.end(), 0); // Fill with 0, 1, 2, ..., n-1
+
+    for (int busStopIndex : busStopNodeIndices) {
+        int totalChildren = clusters[busStopIndex - 1][0] + clusters[busStopIndex - 1][1] + clusters[busStopIndex - 1][2] + clusters[busStopIndex - 1][3];
+        int childrenServed = 0;
+
+        while (childrenServed < totalChildren && !remainingBusIndexes.empty()) {
+            std::uniform_int_distribution<> dis(0, remainingBusIndexes.size() - 1);
+            int busIndex = remainingBusIndexes[dis(gen)];
+            int remainingCapacity = busesCapacities[busIndex] - childrenServed;
+            Route route(busIndex + 1); // Bus index should be 1-based
+
+            std::vector<int> visitedNodes;
+            visitedNodes.push_back(depotNodeIndex); // Start from depot
+            visitedNodes.push_back(busStopIndex); // Visit the bus stop itself
+
+            for (size_t clusterIndex = 0; clusterIndex < clusters[busStopIndex - 1].size(); ++clusterIndex) {
+                if (clusters[busStopIndex - 1][clusterIndex] > 0) {
+                    int clusterNodeId = clusterIndex + 1;
+                    int realClusterNodeId = findClusterID(problemInstance.getNodesMatrix(), clusterNodeId);
+                    visitedNodes.push_back(realClusterNodeId);
+
+                    int childrenCount = std::min(clusters[busStopIndex - 1][clusterIndex], remainingCapacity);
+                    switch (clusterIndex) {
+                        case 0: route.childrenToCluster1 += childrenCount; break;
+                        case 1: route.childrenToCluster2 += childrenCount; break;
+                        case 2: route.childrenToCluster3 += childrenCount; break;
+                        case 3: route.childrenToCluster4 += childrenCount; break;
+                    }
+
+                    childrenServed += childrenCount;
+                    clusters[busStopIndex - 1][clusterIndex] -= childrenCount;
+                }
+            }
+
+            route.visitedNodes = visitedNodes;
+            routes.push_back(route);
+
+            // Remove bus index if capacity is fully utilized
+            if (childrenServed >= totalChildren) {
+                remainingBusIndexes.erase(std::remove(remainingBusIndexes.begin(), remainingBusIndexes.end(), busIndex), remainingBusIndexes.end());
+            }
+        }
+
+        // If still children left and no more buses, mark bus stop as unserved
+        if (childrenServed < totalChildren) {
+            unservedBusStops.push_back(busStopIndex);
+        }
+    }
+
+    return {routes, unservedBusStops};
+}
 
 // Function to check if adding a node's children to a route is within bus capacity
 bool canAddNodeToRoute(const std::vector<NodeDataRow>& nodesMatrix, const Route& route, int nodeId, const std::vector<int>& busesCapacities) {
@@ -592,12 +762,13 @@ bool canAddNodeToRoute(const std::vector<NodeDataRow>& nodesMatrix, const Route&
             int routeTotalChildren = route.childrenToCluster1 + route.childrenToCluster2 + route.childrenToCluster3 + route.childrenToCluster4; 
             int nodeTotalChildren = node.children_to_cluster_1 + node.children_to_cluster_2 + node.children_to_cluster_3 + node.children_to_cluster_4;
 
-            std::cout << "\nNode selected " << nodeId << std::endl;
-            std::cout << "Bus selected " << route.busIndex << std::endl;
-            std::cout << "Bus capacity: " << busCapacity << std::endl;
-            std::cout << "Route total children: " << routeTotalChildren << std::endl;
-            std::cout << "Node total children: " << nodeTotalChildren << std::endl;
-            std::cout << std::endl;
+            // Print info
+            //std::cout << "\nNode selected " << nodeId << std::endl;
+            //std::cout << "Bus selected " << route.busIndex << std::endl;
+            //std::cout << "Bus capacity: " << busCapacity << std::endl;
+            //std::cout << "Route total children: " << routeTotalChildren << std::endl;
+            //std::cout << "Node total children: " << nodeTotalChildren << std::endl;
+            //std::cout << std::endl;
 
             return routeTotalChildren + nodeTotalChildren <= busCapacity;
         }
@@ -621,6 +792,9 @@ double calculateTotalDistance(const std::vector<int>& visitedNodes, const std::v
 
     return totalDistance;
 }
+
+
+
 
 // Function to generate permutations of elements
 void generatePermutations(const std::vector<int>& elements, std::vector<std::vector<int>>& permutations) {
@@ -674,12 +848,12 @@ void findOptimalRoute(Route& route, const std::vector<int>& clusterIDs, const st
             double distance = calculateTotalDistance(currentRoute, distanceMatrix);
 
             // Print permutation and its distance
-            std::cout << "\nPermutation " << ++permutationCounter << ": ";
-            for (size_t i = 0; i < currentRoute.size(); ++i) {
-                std::cout << currentRoute[i];
-                if (i < currentRoute.size() - 1) std::cout << " -> ";
-            }
-            std::cout << ", Distance: " << std::fixed << std::setprecision(2) << distance << std::endl;
+            //std::cout << "\nPermutation " << ++permutationCounter << ": ";
+            //for (size_t i = 0; i < currentRoute.size(); ++i) {
+            //    std::cout << currentRoute[i];
+            //    if (i < currentRoute.size() - 1) std::cout << " -> ";
+            //}
+            //std::cout << ", Distance: " << std::fixed << std::setprecision(2) << distance << std::endl;
 
             // Update route's visitedNodes if current route has smaller distance
             if (distance < minDistance) {
@@ -847,6 +1021,163 @@ void addNodesUsingProbabilityAndFindOptimal(std::vector<Route>& routes, const st
     }
 }
 
+// Function to calculate the fitness of a Route based on visited nodes and distance matrix
+double calculateRouteFitness(const Route& route, const std::vector<std::vector<double>>& distanceMatrix) {
+    double totalDistance = 0.0;
+
+    const std::vector<int>& visitedNodes = route.visitedNodes;
+
+    for (size_t i = 0; i < visitedNodes.size() - 1; i++) {
+        int fromNode = visitedNodes[i];
+        int toNode = visitedNodes[i + 1];
+        totalDistance += distanceMatrix[fromNode + 1][toNode + 1]; // It is 1 based index
+    }
+
+    return totalDistance;
+}
+
+// Function to calculate the total fitness of all routes in a vector
+double calculateRoutesFitness(const std::vector<Route>& routes, const std::vector<std::vector<double>>& distanceMatrix) {
+    double totalFitness = 0.0;
+
+    for (const auto& route : routes) {
+        totalFitness += calculateRouteFitness(route, distanceMatrix);
+    }
+
+    return totalFitness;
+}
+
+// Struct to represent an Individual
+struct Individual {
+    std::vector<Route> routes; // Vector of routes
+    double fitness; // Fitness value
+
+    // Constructor to initialize the variables
+    Individual(const std::vector<Route>& routesVec, double fit) 
+        : routes(routesVec), fitness(fit) {}
+};
+
+// Struct to represent a Population
+struct Population {
+    std::vector<Individual> individuals; // Vector of individuals
+    int generationIndex; // Generation index
+
+    // Constructor to initialize the variables
+    Population()
+        : generationIndex(0) {}
+};
+
+// Function to initialize the population of individuals
+std::vector<Individual> initializePopulation(
+    const ProblemInstance& problemInstance,
+    int populationSize) 
+{
+    std::vector<Individual> population;
+    
+    for (int i = 0; i < populationSize; ++i) {
+        // Build routes and get unserved nodes
+        auto [routes, unservedNodes] = buildRoutesRandomBusesAndNodes(problemInstance, problemInstance.busCapacities);
+
+        // Add unserved nodes to routes using provided procedure
+        addNodesUsingProbabilityAndFindOptimal(
+            routes,
+            unservedNodes,
+            problemInstance.getNodesMatrix(),
+            problemInstance.getBusesCapacity(),
+            findAllClusterIDs(problemInstance.getNodesMatrix()),
+            problemInstance.getDistancesMatrix()
+        );
+
+        // Calculate fitness for the individual (this assumes yous have a function to calculate fitness)
+        double fitness = calculateRoutesFitness(routes, problemInstance.getDistancesMatrix()); // You need to define calculateFitness function
+
+        // Create an individual with the generated routes and calculated fitness
+        Individual individual(routes, fitness);
+
+        // Add the individual to the population
+        population.push_back(individual);
+    }
+    
+    return population;
+}
+
+
+
+// ----------------- EA OPERATORS -----------------
+
+
+
+
+// Function to perform a single swap between two nodes that are neither 0 nor cluster nodes on a random route
+// If the number of cluster nodes is greater than 1, there's a low probability of swapping two cluster nodes instead
+void two_opt(Individual &individual, const std::vector<int> &clusterNodes, const std::vector<std::vector<double>> &distanceMatrix) {
+    // Check if there are any routes in the individual
+    if (individual.routes.empty()) {
+        return;
+    }
+
+    // Select a random route from individual.routes
+    int randomRouteIndex = std::rand() % individual.routes.size();
+    Route &route = individual.routes[randomRouteIndex];
+
+    // Print the route before swapping AND the fitness of the individual before swapping 
+    std::cout << "Route before swapping:\n";
+    printRoute(route);
+    std::cout << "Fitness before swapping: " << individual.fitness << std::endl;
+
+    // Create a set of cluster nodes for quick lookup
+    std::unordered_set<int> clusterNodeSet(clusterNodes.begin(), clusterNodes.end());
+
+    // Collect indices of valid nodes (neither 0 nor cluster nodes)
+    std::vector<int> validNodeIndices;
+    std::vector<int> clusterNodeIndices;
+    for (size_t i = 0; i < route.visitedNodes.size(); ++i) {
+        int nodeId = route.visitedNodes[i];
+        if (nodeId != 0) {
+            if (clusterNodeSet.find(nodeId) != clusterNodeSet.end()) {
+                clusterNodeIndices.push_back(i);
+            } else {
+                validNodeIndices.push_back(i);
+            }
+        }
+    }
+
+    // Determine if a swap should be made between bus stops or clusters
+    // If there are no valid nodes, swap two cluster nodes only if there are at least two cluster nodes
+    // If there are valid nodes, swap two bus stop nodes with a probability of 10%
+    bool swapClusters = 
+        (validNodeIndices.size() > 1) && (std::rand() % 100 < 10) && (clusterNodeIndices.size() > 1) || validNodeIndices.size() < 2 && clusterNodeIndices.size() >= 2;
+
+    if (swapClusters) {
+        // Swap two cluster nodes
+        int idx1 = std::rand() % clusterNodeIndices.size();
+        int idx2 = idx1;
+        while (idx2 == idx1) {
+            idx2 = std::rand() % clusterNodeIndices.size();
+        }
+        std::swap(route.visitedNodes[clusterNodeIndices[idx1]], route.visitedNodes[clusterNodeIndices[idx2]]);
+    } else if (validNodeIndices.size() >= 2) {
+        // Swap two bus stop nodes
+        int idx1 = std::rand() % validNodeIndices.size();
+        int idx2 = idx1;
+        while (idx2 == idx1) {
+            idx2 = std::rand() % validNodeIndices.size();
+        }
+        std::swap(route.visitedNodes[validNodeIndices[idx1]], route.visitedNodes[validNodeIndices[idx2]]);
+    }
+
+    // Update the fitness 
+    double newFitness = calculateRoutesFitness(individual.routes, distanceMatrix);
+    
+    individual.fitness = newFitness;
+
+    // Print the route after swapping AND the fitness of the individual after swapping 
+    std::cout << "\nRoute after swapping:\n";
+    printRoute(route);
+    std::cout << "Fitness after swapping: " << individual.fitness << std::endl;
+}
+
+
 
 
 
@@ -876,34 +1207,30 @@ int main() {
     
     ProblemInstance problemInstance(folderPath, distanceMatrixFile, timeMatrixFile, nodesMatrixFile, edgesMatrixFile, numberOfBuses, busesCapacities);
 
-    // Build routes and get unserved nodes, print the routes and unserved nodes
-    auto [routes, unservedNodes] = buildRoutes(problemInstance, problemInstance.busCapacities);
-
-    for (const Route& route : routes) {
-        printRoute(route);
-    }
+    // Initialize the population
+    std::cout << "\nInitializing the population...\n";
+    int populationSize = 5;
+    std::vector<Individual> population = initializePopulation(problemInstance, populationSize);
     
-    if (!unservedNodes.empty()) {
-        std::cout << "Unserved Bus Stops:" << std::endl;
-        for (int node : unservedNodes) {
-            std::cout << "- Bus Stop " << node << std::endl;
+    for (int i = 0; i < populationSize; i++) {
+        std::cout << "\nIndividual " << i + 1 << ":\n";
+        for (const Route& route : population[i].routes) {
+            printRoute(route);
         }
+        std::cout << "\nFitness: " << population[i].fitness << std::endl;
     }
 
-   // add unserved nodes to routes 
-   addNodesUsingProbabilityAndFindOptimal(
-    routes,
-    unservedNodes,
-    problemInstance.getNodesMatrix(), 
-    problemInstance.getBusesCapacity(), 
-    findAllClusterIDs(problemInstance.getNodesMatrix()),
-    problemInstance.getDistancesMatrix()
-    );
+    // Choose the index of an individual 
+    int individualIndex = 0;
+    std::cout << "\nIndividual " << individualIndex + 1 << ":\n";
 
-    // Print the updated routes
-    for (const Route& route : routes) {
-        printRoute(route);
-    }
+    // Get the cluster nodes
+    std::vector<int> clusterNodes = findAllClusterIDs(problemInstance.getNodesMatrix());
+
+    // Perform a single swap between two nodes that are neither 0 nor cluster nodes on a random route
+    two_opt(population[individualIndex], clusterNodes, problemInstance.getDistancesMatrix());
+
+
 
     return 0;
 }
