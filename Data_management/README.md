@@ -30,6 +30,8 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
+add_childrenTaken_dict: add children_take_dict to the route structure 
+
 ea_operators4: new function: 2 point move 
 
 ea_operators3: new function: bind nnn
