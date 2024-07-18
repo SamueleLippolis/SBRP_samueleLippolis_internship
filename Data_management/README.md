@@ -30,7 +30,9 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
-ea_operators: new function: 2 opt 
+ea_operators2: new function: shift operator 
+
+ea_operators: new function: 2 opt operator
 
 init_population2: New function: initializePopulation: it initiliaze a populatation of individuls.
 
