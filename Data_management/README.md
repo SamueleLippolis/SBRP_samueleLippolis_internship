@@ -30,6 +30,10 @@ BUTTRIO: Buttrio data exctracted using the python files
 
 #### C++ files 
 
+ea_operators4: new function: 2 point move 
+
+ea_operators3: new function: bind nnn
+
 ea_operators2: new function: shift operator 
 
 ea_operators: new function: 2 opt operator
